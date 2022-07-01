@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction type</th>
+      <th>Stock symbol</th>
+      <th>Order quantity</th>
+      <th>Stock price</th>
+      <th>Total stock price</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.stock_symbol %></td>
+        <td><%= transaction.order_quantity %></td>
+        <td><%= transaction.stock_price %></td>
+        <td><%= transaction.total_stock_price %></td>
+        <td><%= transaction.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

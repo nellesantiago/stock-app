@@ -1,0 +1,10 @@
+<%= form_with(model: user) do |form| %>
+
+  <div class="field">
+    <%= form.hidden_field :status, value: 'declined' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit :Decline %>
+  </div>
+<% end %>
