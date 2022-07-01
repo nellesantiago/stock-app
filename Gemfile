@@ -62,3 +62,5 @@ gem 'net-pop', require: false
 gem 'devise'
 
 gem 'mailjet'
+
+gem 'iex-ruby-client'
