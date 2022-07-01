@@ -16,10 +16,11 @@ class TransactionsController < ApplicationController
     ActiveRecord::Base.transaction do
       @transaction = current_user.transactions.create(transaction_params)
       update_user_stocks
+      update_balance
       redirect_to user_stocks_path
     end
     rescue ActiveRecord::RecordInvalid
-    redirect_to request.referrer, alert: "#{@user_stock.errors.full_messages[0]}"
+    redirect_to request.referrer, alert: "#{@user_stock.errors.full_messages[0]} #{current_user.errors.full_messages[0]}"
   end
 
   private
@@ -40,5 +41,12 @@ class TransactionsController < ApplicationController
         stock_price: @transaction.stock_price,
         order_quantity: @user_stock.order_quantity.to_i + @transaction.order_quantity.to_i
       ) if @transaction.transaction_type_buy?
+
+      return
+    end
+
+    def update_balance
+      current_user.update!(balance: current_user.balance.to_d - @transaction.total_stock_price.to_d) if @transaction.transaction_type_buy?
+      current_user.update!(balance: current_user.balance.to_d + @transaction.total_stock_price.to_d) if @transaction.transaction_type_sell?
     end
 end
