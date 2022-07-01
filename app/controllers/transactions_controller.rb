@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
       @user_stock = current_user.user_stocks.find_or_initialize_by(stock_symbol: @transaction.stock_symbol)
 
       @user_stock.update!(
-        order_quantity: @user_stock.order_quantity + (@transaction.order_quantity * -1)
+        order_quantity: @user_stock.order_quantity.to_i + (@transaction.order_quantity.to_i * -1)
       ) if @transaction.transaction_type_sell?
 
       @user_stock.update!(
@@ -42,7 +42,6 @@ class TransactionsController < ApplicationController
         order_quantity: @user_stock.order_quantity.to_i + @transaction.order_quantity.to_i
       ) if @transaction.transaction_type_buy?
 
-      return
     end
 
     def update_balance
