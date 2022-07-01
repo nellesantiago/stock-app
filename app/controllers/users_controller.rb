@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user.status = 'approved'
     @user.skip_confirmation!
     if @user.save
-      # UserMailer.with(user: @user).welcome_email.deliver_now
+      UserMailer.with(user: @user).welcome_email.deliver_now
       redirect_to users_path, notice: "User was successfully created."
     else
       render :new
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     if @user.update(user_params)
-      # UserMailer.with(user: @user).welcome_email.deliver_now
+      UserMailer.with(user: @user).welcome_email.deliver_now
       redirect_to users_path, notice: "User was successfully updated."
     else
       render :edit
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    # UserMailer.with(user: @user).declined_account.deliver_now
+    UserMailer.with(user: @user).declined_account.deliver_now
     @user.destroy
     redirect_to users_path, notice: "User was successfully destroyed."
   end
