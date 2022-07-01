@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Company name</th>
+      <th>Logo url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.symbol %></td>
+        <td><img src="<%= stock.logo_url %>"><%= stock.company_name %></td>
+        <td><%= link_to 'Show', stock %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
