@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions
   devise_scope :user do
     root 'devise/sessions#new'
   end
