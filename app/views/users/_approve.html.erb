@@ -1,0 +1,10 @@
+<%= form_with(model: user) do |form| %>
+
+  <div class="field">
+    <%= form.hidden_field :status, value: 'approved' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit :Approve %>
+  </div>
+<% end %>

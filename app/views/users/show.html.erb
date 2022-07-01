@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @user.status %>
+</p>
+
+<h1>User Stocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th>Stock symbol</th>
+      <th>Order quantity</th>
+      <th>Stock price</th>
+      <th>Total stock price</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_stocks.each do |user_stock| %>
+      <tr>
+        <td><%= user_stock.company_name %></td>
+        <td><%= user_stock.stock_symbol %></td>
+        <td><%= user_stock.order_quantity %></td>
+        <td><%= user_stock.stock_price %></td>
+        <td><%= user_stock.total_stock_price %></td>
+        <td><%= user_stock.user_id %></td>
+        <td><%= link_to 'Show', user_stock %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction type</th>
+      <th>Stock symbol</th>
+      <th>Order quantity</th>
+      <th>Stock price</th>
+      <th>Total stock price</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.stock_symbol %></td>
+        <td><%= transaction.order_quantity %></td>
+        <td><%= transaction.stock_price %></td>
+        <td><%= transaction.total_stock_price %></td>
+        <td><%= transaction.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', users_path %>
