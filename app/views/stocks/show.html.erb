@@ -15,4 +15,6 @@
   <%= @stock.get_quote.latest_price %>
 </p>
 
+<%= link_to 'Buy', new_transaction_path(:stock_symbol => @stock.symbol, :transaction_type => 'buy') %> |
+<%= link_to 'Sell', new_transaction_path(:stock_symbol => @stock.symbol, :transaction_type => 'sell') %> |
 <%= link_to 'Back', stocks_path %>

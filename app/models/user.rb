@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :user_stocks
+  has_many :transactions
 end

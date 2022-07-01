@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Stock symbol</th>
       <th>Company name</th>
+      <th>Stock symbol</th>
       <th>Order quantity</th>
       <th>Stock price</th>
       <th>Total stock price</th>
@@ -18,15 +18,13 @@
   <tbody>
     <% @user_stocks.each do |user_stock| %>
       <tr>
-        <td><%= user_stock.stock_symbol %></td>
         <td><%= user_stock.company_name %></td>
+        <td><%= user_stock.stock_symbol %></td>
         <td><%= user_stock.order_quantity %></td>
         <td><%= user_stock.stock_price %></td>
         <td><%= user_stock.total_stock_price %></td>
         <td><%= user_stock.user_id %></td>
         <td><%= link_to 'Show', user_stock %></td>
-        <td><%= link_to 'Edit', edit_user_stock_path(user_stock) %></td>
-        <td><%= link_to 'Destroy', user_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New User Stock', new_user_stock_path %>
+<%= link_to 'Log out', destroy_user_session_path, method: :delete %>

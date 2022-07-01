@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Stock symbol:</strong>
-  <%= @user_stock.stock_symbol %>
+  <strong>Company name:</strong>
+  <%= @user_stock.company_name %>
 </p>
 
 <p>
-  <strong>Company name:</strong>
-  <%= @user_stock.company_name %>
+  <strong>Stock symbol:</strong>
+  <%= @user_stock.stock_symbol %>
 </p>
 
 <p>
@@ -30,5 +30,4 @@
   <%= @user_stock.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_user_stock_path(@user_stock) %> |
 <%= link_to 'Back', user_stocks_path %>
