@@ -1,5 +1,5 @@
 class BalanceController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
 
     def edit
         @user = current_user
