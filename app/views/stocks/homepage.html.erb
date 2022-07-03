@@ -1,0 +1,36 @@
+<div class="homepage">
+  <header>
+    <nav>
+      <%= image_tag "logo.png", class: "logo" %>
+      <ul>
+        <li>About</li>
+        <li>Blog</li>
+        <li>Pricing</li>
+        <li>News</li>
+        <li>Support</li>
+      </ul>
+      <%= link_to "Log in", new_user_session_path %>
+    </nav>
+  </header>
+  <main>
+    <div class="left">
+        <div class="text">
+            <div class="slogan">
+                Put your cash to work in ways that work for you.
+            </div>
+            <div class="texts">
+                Discover true value with a best-in-class trading experience.
+            </div>
+        </div>
+        <div class="options">
+        <%= link_to new_user_registration_path do %>
+        <i class="fa-solid fa-user-pen"></i>Register
+        <% end %>
+        <div class="contact"><i class="fa-solid fa-phone"></i>Contact Us</div>      
+        </div>
+    </div>
+    <div class="right">
+        <%= image_tag "graph-removebg.png" %>
+    </div>
+  </main>
+</div>
