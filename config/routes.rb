@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  devise_scope :user do
-    root 'devise/sessions#new'
-  end
+  root 'stocks#homepage'
   devise_for :users, :path_prefix => 'devise'
   
   resources :users
