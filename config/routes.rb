@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'stocks#homepage'
+  root 'stocks#home'
   devise_for :users, :path_prefix => 'devise'
   
   resources :users

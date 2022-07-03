@@ -1,0 +1,148 @@
+<div class="home">
+  <header>
+    <nav>
+      <div class="options">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li>About</li>
+          <li>Blog</li>
+          <li>Pricing</li>
+          <li>News</li>
+          <li>Support</li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Register", new_user_registration_path %>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="left">
+      <div class="text">
+        <div class="slogan">
+          Put your cash <br/>
+          to work in ways <br/>
+          that work for you
+        </div>
+        <%# <div class="texts">
+          Discover true value with a best-in-class trading experience.<br/>
+          Egia helps you manage your portfolio without the stress.
+        </div> %>
+      </div>
+      <div class="details">
+        <div class="invest">
+          <div class="icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+          <div class="title">Invest any amount</div>
+          <div class="text">Choose how much you want to invest, and we'll convert from <br/>pesos to parts of a whole share.</div>
+        </div>
+        <div class="build">
+          <div class="icon"><i class="fa-solid fa-newspaper"></i></div>
+          <div class="title">Build a portfolio</div>
+          <div class="text">Customize your portfolio with different companies' pieces and funds to reduce risk.</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="get-app">
+          Get App
+        </div>
+        <div class="learn-more">
+          Learn More <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+      
+    </div>
+    <div class="right">
+      <div class="container">
+      <div class="bg"><%= image_tag "arrow.png"%></div>
+        <%# <div class="bg">
+          <div class="bar-1"></div>
+          <div class="bar-2nd">
+            <div class="bar-2"></div>
+            <div class="bar-3"></div>
+          </div>
+          <div class="bar-3rd">
+            <div class="bar-4"></div>
+            <div class="bar-5"></div>
+          </div>
+          <div class="bar-6"></div>
+          <div class="bar-7"></div>
+          <div class="bar-4th">
+            <div class="bar-8"></div>
+            <div class="bar-9"></div>
+          </div>
+          <div class="bar-10"></div>
+        </div> %>
+        <div class="phone-1">
+          <div class="top">
+            <div class="display">
+              <div class="bar">
+                <div class="time">
+                  <%= DateTime.now.strftime("%l:%M") %>
+                </div>
+                <div class="icons">
+                  <%= image_tag "icons.png" %>
+                </div>
+              </div>
+              <div class="avatar">
+                <%= image_tag "avatar.png" %>
+                Hi, Maia
+              </div>
+              <div class="balance">
+                Account balance
+                <div class="amount">₱329,113</div>
+              </div>
+            </div>
+          </div>
+          <div class="transactions">
+            <div class="box">
+              <i class="fa-solid fa-wallet"></i></i>Top-up
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-money-bill-wave"></i>Buy
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-hand-holding-dollar"></i>Sell
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="portfolio">
+            <div class="title">
+              My Portfolio <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="box">
+              <div class="stock">
+                <%= image_tag "msft.png" %>
+                <div class="symbol">MSFT</div>
+                <div class="price">₱259.58</div>
+              </div>
+              <div class="stock">
+                <%= image_tag "nflx.png" %>
+                <div class="symbol">NFLX</div>
+                <div class="price">₱179.95</div>
+              </div>
+              <div class="stock">
+                <%= image_tag "shop.png" %>
+                <div class="symbol">SHOP</div>
+                <div class="price">₱31.41</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <div class="box">
+            <i class="fa-solid fa-house"></i>Overview
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-calendar-days"></i>Monthly
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-bell"></i>Notification
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-ellipsis"></i>More
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>

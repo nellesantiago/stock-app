@@ -10,7 +10,7 @@ class StocksController < ApplicationController
     @stock = Stock.find(params[:id])
   end
 
-  def homepage
+  def home
   end
 
 end
