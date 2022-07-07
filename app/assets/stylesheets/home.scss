@@ -39,7 +39,7 @@
 
         a:nth-child(2) {
           text-decoration: none;
-          background-color: #436d6c;
+          background-color: #414af4;
           width: 100px;
           height: 35px;
           border-radius: 20px;
@@ -50,14 +50,14 @@
           margin-left: 30px;
 
           &:hover {
-            background-color: #ebf9ed;
-            border: 1px solid #436d6c;
-            color: #436d6c;
+            background-color: #eff8fd;
+            border: 1px solid #414af4;
+            color: #414af4;
           }
         }
 
         a:nth-child(1) {
-          color: #436d6c;
+          color: #414af4;
           text-decoration: none;
           font-weight: 500;
 
@@ -112,12 +112,12 @@
         .title {
           font-weight: 600;
           margin-bottom: 10px;
-          color: #436d6c;
+          color: #383c8d;
         }
 
         .fa-solid {
           margin-bottom: 10px;
-          color: #436d6c;
+          color: #383c8d;
         }
       }
 
@@ -127,7 +127,7 @@
         align-items: center;
 
         .get-app {
-          background-color: #436d6c;
+          background-color: #414af4;
           width: 150px;
           height: 50px;
           border-radius: 20px;
@@ -140,7 +140,7 @@
         }
 
         .learn-more {
-          color: #436d6c;
+          color: #414af4;
           font-weight: 500;
           cursor: pointer;
 
@@ -202,6 +202,20 @@
                 margin-bottom: 10px;
               }
 
+              .fa-wallet {
+                color: #383c8d;
+              }
+
+              .fa-money-bill-wave {
+                color: #436d6c;
+
+              }
+
+              .fa-hand-holding-dollar {
+                color: #b54b4d;
+
+              }
+
               &:nth-child(1) {
                 border-right: 2px solid rgb(235, 235, 235);
               }
@@ -213,7 +227,7 @@
           }
 
           .top {
-            background-color: #cceacf;
+            background-color: #d1e7ff;
             height: 280px;
             border-radius: 20px 20px 0 0;
             // box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
@@ -429,7 +443,7 @@
   //       button {
   //         width: 50px;
   //         height: 30px;
-  //         background-color: #436d6c;
+  //         background-color: #414af4;
   //         color: white;
   //         outline: none;
   //         border: none;

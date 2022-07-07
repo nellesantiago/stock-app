@@ -40,8 +40,9 @@
                 <%# <%= @client.chart(@stocks[i].symbol, 'dynamic') %>
               </div>
               <div class="bottom-box">
-                <div class="price">$329.13</div>
-                <div class="percent">+0.29%</div>
+                <div class="price"><%= number_to_currency(@stocks[i].get_quote.latest_price)%></div>
+                
+                <div class="<%= @stocks[i].get_quote.change_percent_s[0] == "-" ?  "negative" : "positive" %>"><%= @stocks[i].get_quote.change_percent_s %></div>
               </div>
             </div>
           <% end %>
@@ -52,7 +53,7 @@
       <% if @user_stocks.empty? %>
         <div class="empty-portfolio">
           <%= image_tag "guy.png" %>
-          <div class="text">Your portfolio is empty. <%= link_to "Start buying!", stocks_path %></div>
+          <div class="text">Your portfolio is empty <%= link_to "Start buying!", stocks_path %></div>
         </div>
       <% else %>
         <div class="container">
