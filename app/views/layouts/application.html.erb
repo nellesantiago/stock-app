@@ -12,8 +12,11 @@
   <script src="https://kit.fontawesome.com/854e38c6b1.js" crossorigin="anonymous"></script>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <% if user_signed_in? %>
+      <div class="sidebar">
+      <%= render "layouts/sidebar" %>
+      </div>
+      <% end %>
     <%= yield %>
   </body>
 </html>
