@@ -64,3 +64,7 @@ gem 'devise'
 gem 'mailjet'
 
 gem 'iex-ruby-client'
+
+gem 'chartkick'
+
+gem "groupdate"
