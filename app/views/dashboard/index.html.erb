@@ -1,0 +1,144 @@
+<div class="dashboard">
+  <div class="left">
+    <div class="top">
+      <header>
+        <div class="welcome">Welcome Back, <%= current_user.first_name %>!</div>
+        <div class="title">Dashboard</div>
+      </header>
+      <div class="news-balance">
+        <div class="news">
+          <div class="account">Account Details</div>
+          <div class="email">Email Address: <%= current_user.email %></div>
+          <div class="status">Account Status: <%= current_user.status %></div>
+          <div class="shares">Total Number of Shares: <%= current_user.user_stocks.count %></div>
+        </div>
+        <div class="balance">
+          <div class="title">Total balance</div>
+          <div class="amount"><%= number_to_currency(current_user.balance) %></div>
+          <div class="options">
+            <%= link_to "Top Up", balance_top_up_path, class: "button top-up" %>
+            <%= link_to "Buy", stocks_path, class: "button buy"%>
+            <%= link_to "Sell", user_stocks_path, class: "button sell" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle">
+      <div class="nav">
+        <div class="title">Stocks</div>
+        <%= link_to "See All", stocks_path %>
+      </div>
+      <div class="stocks">
+        <% @index.each do |i|%>
+          <%= link_to stock_path(@stocks[i].id) do %>
+            <div class="box">
+              <div class="top-box">
+                <img src="<%= @stocks[i].logo_url %>">
+                <%= @stocks[i].company_name %>
+              </div>
+              <div class="chart">
+                <%# <%= @client.chart(@stocks[i].symbol, 'dynamic') %>
+              </div>
+              <div class="bottom-box">
+                <div class="price">$329.13</div>
+                <div class="percent">+0.29%</div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="bottom">
+      <% if @user_stocks.empty? %>
+        <div class="empty-portfolio">
+          <%= image_tag "guy cpy.png" %>
+          <div class="text">Your portfolio is empty. <%= link_to "Start buying!", stocks_path %></div>
+        </div>
+      <% else %>
+        <div class="container">
+          <div class="title">
+            <div>My Portfolio</div>
+            <%= link_to user_stocks_path do %>
+              <i class="fa-solid fa-up-right-from-square"></i>
+            <% end %>
+          </div>
+          <div class="header">
+            <div class="name">Symbol</div>
+            <div class="name">Company</div>
+            <div class="name">Shares</div>
+            <div class="name">Stock Price</div>
+            <div class="name">Total</div>
+          </div>
+          <% @user_stocks.order(created_at: :desc).take(3).each do |user_stock| %>
+            <div class="table">
+              <div class="symbol data"><%= user_stock.stock_symbol %></div>
+              <div class="name data"><%= user_stock.company_name %></div>
+              <div class="quantity data"><%= user_stock.order_quantity %></div>
+              <div class="price data"><%= number_to_currency(user_stock.stock_price) %></div>
+              <div class="total data"><%= number_to_currency(user_stock.total_stock_price) %></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="right">
+    <header>
+      <input type="text", class="search", placeholder="Search">
+      <i class="fa-regular fa-bell"></i>
+      <%= image_tag "avatar.png" %>
+    </header>
+    <div class="container">
+      <div class="text">Card Details</div>
+      <div class="card">
+        <div class="top">
+          <div class="debit">
+            <div>Debit Card</div>
+            <%= image_tag "card-logo.png" %>
+          </div>
+          <div class="bottom">
+            <div class="card-number">
+              <div class="number">
+                <%= 4.times.map {rand(1..9)}.join("") %>
+                <%= 4.times.map {rand(1..9)}.join("") %>
+                <%= 4.times.map {rand(1..9)}.join("") %>
+                <%= 4.times.map {rand(1..9)}.join("") %>
+              </div>
+            </div>
+            <div class="date"><%= rand(01..12) %>/<%= rand(23..26) %></div>
+            <div class="name">
+              <%= current_user.first_name %> <%= current_user.last_name %>
+              <%= image_tag "visa.png" %>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="transactions">
+          <div class="title">Recent Transactions</div>
+      <% if current_user.transactions.empty? %>
+        <div class="empty-transactions">
+          No Transactions
+          <%= video_tag "guy.mp4", autoplay: true, loop: :loop %>
+        </div>
+      <% else %>
+          <div class="box">
+            <% @transactions.order(created_at: :desc).take(5).each do |transaction| %>
+              <div class="<%= transaction.transaction_type_buy? ? "green-list" : "red-list" %>">
+                <img src="<%= @stocks.find_by(symbol: transaction.stock_symbol).logo_url %>">
+                <div class="details">
+                  <div class="company">
+                    <%= transaction.company_name %></div>
+                  <% if transaction.transaction_type_buy? %> Bought
+                  <% else %>
+                    Sold
+                  <% end %>
+                  <%= pluralize(transaction.order_quantity, "Share") %>
+                </div>
+                <div class="amount"><%= number_to_currency(transaction.total_stock_price) %></div>
+              </div>
+            <% end %>
+          </div>
+      <% end %>
+        </div>
+      </div>
+    </div>
