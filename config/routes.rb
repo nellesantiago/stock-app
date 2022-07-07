@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'stocks#home'
+  get 'dashboard', to: 'dashboard#index', as: "dashboard"
   devise_for :users, :path_prefix => 'devise'
   
   resources :users
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :transactions, only: %i[index]
   end
+
 
   namespace :balance do
     get 'top-up', action: :edit
