@@ -11,18 +11,20 @@ User.create(
     password: Rails.application.credentials.admin_password,
     password_confirmation: Rails.application.credentials.admin_password,
     role: 'admin',
-    status: 'approved',
+    status: 'Approved',
+    first_name: 'Egia',
+    last_name: 'Trading',
     confirmed_at: Date.current
 )
 
-client = IEX::Api::Client.new
+# client = IEX::Api::Client.new
 
-stocks_symbols = ['AMZN', 'AAPL', 'NVDA', 'MSFT', 'NFLX', 'KO', 'INTC', 'SNOW', 'DIS', 'CVX', 'T', 'SHOP', 'ABNB', 'ETSY', 'VZ', 'JNJ', 'C', 'F', 'WMT']
+# stocks_symbols = ['AMZN', 'AAPL', 'NVDA', 'MSFT', 'NFLX', 'KO', 'INTC', 'SNOW', 'DIS', 'CVX', 'T', 'SHOP', 'ABNB', 'ETSY', 'VZ', 'JNJ', 'C', 'F', 'WMT']
 
-stocks_symbols.each do |symbol|
-    Stock.create(
-        symbol: symbol,
-        company_name: client.company(symbol).company_name,
-        logo_url: client.logo(symbol).url
-    )
-end
+# stocks_symbols.each do |symbol|
+#     Stock.create(
+#         symbol: symbol,
+#         company_name: client.company(symbol).company_name,
+#         logo_url: client.logo(symbol).url
+#     )
+# end
