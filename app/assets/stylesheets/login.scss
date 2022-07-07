@@ -195,7 +195,7 @@
     transform: translate(-50%, -50%);
     background-color: white;
     width: 1300px;
-    height: 680px;
+    height: 700px;
     border-radius: 20px;
 
     .right {
@@ -231,7 +231,8 @@
             align-items: center;
 
             input[type="email"],
-            input[type="password"] {
+            input[type="password"],
+            input[type="text"] {
                 width: 400px;
                 height: 60px;
                 border: none;
