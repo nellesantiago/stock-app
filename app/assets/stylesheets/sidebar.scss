@@ -1,0 +1,45 @@
+.sidebar {
+  background-color: white;
+  width: 90px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 45px 10px;
+
+  .logo {
+    width: 45px;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+    img {
+      width: 30px;
+      margin-top: 30px;
+    }
+
+}
+.logout {
+    width: 30px;
+}
+}
+
+// svg {
+//     width: 50px;
+//     height: 50px;
+//     // fill: #2f2f2f;
+//     padding: 10px;
+//     stroke: #2f2f2f;
+
+//     &:focus {
+//         fill: white;
+//         background-color: rgb(123, 189, 243);
+
+//     }
+// }
