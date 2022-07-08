@@ -1,37 +1,99 @@
-<p id="notice"><%= notice %></p>
-
-<h1>User Stocks</h1>
-
-<h2>Balance: <%= current_user.balance %></h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Company name</th>
-      <th>Stock symbol</th>
-      <th>Order quantity</th>
-      <th>Stock price</th>
-      <th>Total stock price</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @user_stocks.each do |user_stock| %>
-      <tr>
-        <td><%= user_stock.company_name %></td>
-        <td><%= user_stock.stock_symbol %></td>
-        <td><%= user_stock.order_quantity %></td>
-        <td><%= user_stock.stock_price %></td>
-        <td><%= user_stock.total_stock_price %></td>
-        <td><%= user_stock.user_id %></td>
-        <td><%= link_to 'Show', user_stock %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+<div class="user-stocks">
+  <div class="left">
+    <div class="top">
+      <div class="greeting">Hi, <%= current_user.first_name %> </div>
+      <div class="row">
+        <div class="balance">
+          <div class="title">Total Balance </div>
+          <div class="amount"><%= number_to_currency(current_user.balance) %> </div>
+        </div>
+        <%= link_to "+ Top Up", balance_top_up_path, class: "top-up"%>
+      </div>
+      <div class="card-row">
+        <%= render "layouts/card" %>
+        <div class="shares">
+          <div class="title">Transactions</div>
+          <div class="count">
+            <div class="bought flex">
+              <div class="count"><%= @transactions.transaction_type_buy.count %></div>
+              <div class="text">Bought</div>
+            </div>
+            <div class="sold flex">
+              <div class="count"><%= @transactions.transaction_type_sell.count %></div>
+              <div class="text">Sold</div>
+            </div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="title">Activity</div>
+          <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "180px", height: "125px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#ee8182"], empty: "No data yet. Start buying shares now!" %>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-row">
+      <div class="title">My Portfolio</div>
+      <div class="container">
+        <div class="header">
+          <div class="label">Date</div>
+          <div class="label">Company</div>
+          <div class="label">Shares</div>
+          <div class="label">Stock Price</div>
+          <div class="label">Total</div>
+          <div class="label">Action</div>
+        </div>
+        <div class="table">
+          <% @user_stocks.order(created_at: :desc).each do |user_stock| %>
+            <div class="date-time list">
+              <div class="date"><%= user_stock.created_at.strftime("%b %d, %Y") %></div>
+              <div class="time"><%= user_stock.created_at.strftime("%l:%M %p") %></div>
+            </div>
+            <div class="company list">
+              <img src="<%= @stocks.find_by(symbol: user_stock.stock_symbol).logo_url %>">
+              <div class="details">
+                <div class="symbol"><%= user_stock.stock_symbol %></div>
+                <div class="company-name"><%= user_stock.company_name %></div>
+              </div>
+            </div>
+            <div class="quantity list"><%= user_stock.order_quantity %></div>
+            <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
+            <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
+            <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'sell') do %>
+            <%= image_tag "sell.png" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="nav">My Profile</div>
+    <div class="user-details">
+      <%= image_tag "avatar.png" %>
+      <div class="full-name"><%= current_user.first_name%> <%=current_user.last_name %></div>
+      <div class="email"><%= current_user.email%></div>
+    </div>
+    <div class="row-details">
+      <div class="user-status">
+        <div class="user">Status:</div>
+        <% if current_user.pending? %>
+          <div class="status pending">Pending</div>
+        <% elsif current_user.approved? %>
+          <div class="status approved">Approved</div>
+        <% else %>
+          <div class="status declined">Declined</div>
+        <% end %>
+      </div>
+      <div class="account-created">
+        <div class="account">Account Created:</div>
+        <div class="created"><%= current_user.created_at.strftime("%b %m, %Y")%></div>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="title">
+        <div class="date">Spent in <%= Date.current.strftime("%B %Y") %></div>
+        <i class="fa-regular fa-calendar"></i>
+      </div>
+      <%= column_chart @user_stocks.pluck(:created_at, :total_stock_price), width: "500px", height: "380px", class: "column-chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"]  %>
+    </div>
+  </div>
+</div>
