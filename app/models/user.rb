@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  enum status: {Pending: 0, Approved: 1, Declined: 2}
+  enum status: {pending: 0, approved: 1, declined: 2}
   enum role: {trader: 0, admin: 1}
 
   has_many :user_stocks, dependent: :destroy
