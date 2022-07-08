@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="top">
+    <div class="debit">
+      <div>Debit Card</div>
+      <%= image_tag "card-logo.png" %>
+    </div>
+    <div class="bottom">
+      <div class="card-number">
+        <div class="number">
+          <%= 4.times.map {rand(1..9)}.join("") %>
+          <%= 4.times.map {rand(1..9)}.join("") %>
+          <%= 4.times.map {rand(1..9)}.join("") %>
+          <%= 4.times.map {rand(1..9)}.join("") %>
+        </div>
+      </div>
+      <div class="date"><%= rand(01..12) %>/<%= rand(23..26) %></div>
+      <div class="name">
+        <%= current_user.first_name %> <%= current_user.last_name %>
+        <%= image_tag "visa.png" %>
+      </div>
+    </div>
+  </div>
+</div>
