@@ -29,3 +29,7 @@ body {
     padding-left: 10px;
     text-align: left;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
