@@ -5,6 +5,6 @@ class DashboardController < ApplicationController
     @stocks = Stock.all
     @card_number = 4.times.map {rand(1..9)}
     @client = IEX::Api::Client.new
-    @index = [4, 16, 13, 12]
+    @index = [6, 18, 16, 15]
     end
 end
