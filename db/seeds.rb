@@ -17,14 +17,14 @@ User.create(
     confirmed_at: Date.current
 )
 
-# client = IEX::Api::Client.new
+client = IEX::Api::Client.new
 
-# stocks_symbols = ['AMZN', 'AAPL', 'NVDA', 'MSFT', 'NFLX', 'KO', 'INTC', 'SNOW', 'DIS', 'CVX', 'T', 'SHOP', 'ABNB', 'ETSY', 'VZ', 'JNJ', 'C', 'F', 'WMT']
+stocks_symbols = ['AAPL', 'MSFT', 'CVX', 'BBBY', 'F', 'NVDA', 'NFLX', 'INTC', 'TSLA', 'T', 'KO', 'DIS', 'AMZN', 'WMT', 'JNJ','ABNB', 'ETSY', 'VZ', 'C', 'AMD']
 
-# stocks_symbols.each do |symbol|
-#     Stock.create(
-#         symbol: symbol,
-#         company_name: client.company(symbol).company_name,
-#         logo_url: client.logo(symbol).url
-#     )
-# end
+stocks_symbols.each do |symbol|
+    Stock.create(
+        symbol: symbol,
+        company_name: client.company(symbol).company_name,
+        logo_url: client.logo(symbol).url
+    )
+end
