@@ -6,11 +6,14 @@
   <%= link_to stocks_path do %>
     <%= image_tag "stock.png" %>
   <% end %>
+  <%= link_to user_stocks_path do %>
+    <%= image_tag "user.png" %>
+  <% end%>
   <%= link_to transactions_path do %>
-  <%= image_tag "wallet.png" %>
+    <%= image_tag "wallet.png" %>
   <% end %>
   <%= image_tag "settings.png" %>
 </div>
 <%= link_to destroy_user_session_path, method: :delete do %>
-<%= image_tag  "logout.png", class: "logout" %>
+  <%= image_tag  "logout.png", class: "logout" %>
 <% end %>
