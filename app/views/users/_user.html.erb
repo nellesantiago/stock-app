@@ -1,0 +1,10 @@
+  <div id="<%= dom_id user %>">
+    <%= user.email %>
+    <%= user.status %>
+    <%= user.role %>
+    <%= link_to 'Show', user, data: {turbo_frame: "_top"} %>
+    <%= render 'users/approve', user: user %>
+    <%= render 'users/decline', user: user %>
+    <%= link_to "Edit", edit_user_path(user), data: {turbo_frame: "modal"} %>
+    <%= link_to 'delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>

@@ -28,8 +28,13 @@ class UsersController < ApplicationController
     @user.status = 'approved'
     @user.skip_confirmation!
     if @user.save
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend("users", partial: "users/user", locals: {user: @user})
+        end
+        format.html { redirect_to users_path, notice: "User was successfully created." }
+      end
       UserMailer.with(user: @user).welcome_email.deliver_now
-      redirect_to users_path, notice: "User was successfully created."
     else
       render :new
     end
@@ -49,7 +54,12 @@ class UsersController < ApplicationController
   def destroy
     UserMailer.with(user: @user).declined_account.deliver_now
     @user.destroy
-    redirect_to users_path, notice: "User was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to users_path, notice: "User was successfully destroyed." }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(@user)
+      end
+    end
   end
 
   private
