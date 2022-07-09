@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
         stored_location_for(resource) || dashboard_path
     end
 
-    # def after_sign_out_path_for(resource)
-    #     stored_location_for(resource) || root_path
-    # end
-
     protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
 

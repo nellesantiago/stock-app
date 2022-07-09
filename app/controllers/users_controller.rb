@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       if current_user.admin?
         return
       else
-        redirect_to stocks_path
+        redirect_to user_stocks_path, alert: "Function is only for admin"
       end
     end
 end
