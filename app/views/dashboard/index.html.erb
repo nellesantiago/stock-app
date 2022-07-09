@@ -16,9 +16,9 @@
         </div>
         <div class="balance">
           <div class="title">Total balance</div>
-          <div class="amount"><%= number_to_currency(current_user.balance) %></div>
+          <%= render "users/balance", user: current_user %>
           <div class="options">
-            <%= link_to "Top Up", balance_top_up_path, class: "button top-up" %>
+            <%= link_to "Top Up", balance_top_up_path, class: "button top-up", data: {turbo_frame: "modal"} %>
             <%= link_to "Buy", stocks_path, class: "button buy"%>
             <%= link_to "Sell", user_stocks_path, class: "button sell" %>
           </div>
