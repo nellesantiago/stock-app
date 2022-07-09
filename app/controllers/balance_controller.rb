@@ -13,7 +13,16 @@ class BalanceController < ApplicationController
     end
 
 private
+
     def balance_param
         params.require(:user).permit(:balance)
+    end
+
+    def verify_role
+        if current_user.trader? && current_user.approved?
+            return
+        else
+            redirect_to users_path, alert: "Wait for admin approval"
+        end
     end
 end

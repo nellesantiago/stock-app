@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :verify_role
 
   def index
     @transactions = current_user.transactions
@@ -48,5 +48,13 @@ class TransactionsController < ApplicationController
     def update_balance
       current_user.update!(balance: current_user.balance.to_d - @transaction.total_stock_price.to_d) if @transaction.transaction_type_buy?
       current_user.update!(balance: current_user.balance.to_d + @transaction.total_stock_price.to_d) if @transaction.transaction_type_sell?
+    end
+
+    def verify_role
+      if current_user.approved? && current_user.trader?
+        return
+      else
+        redirect_to user_stocks_path, alert: "Wait for admin approval"
+      end
     end
 end
