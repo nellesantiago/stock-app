@@ -8,7 +8,11 @@
       <div class="news-balance">
         <div class="news">
           <div class="title">Activity</div>
-          <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "440px", height: "140px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#ee8182"], empty: "No data yet. Start buying shares now!" %>
+          <% if @transactions.empty? %>
+          <div class="no-data">No data</div>
+          <% else %>
+          <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "440px", height: "140px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"] %>
+          <% end %>
         </div>
         <div class="balance">
           <div class="title">Total balance</div>
@@ -37,8 +41,12 @@
               <div class="chart">
                 <%# <%= line_chart @client.chart(@stocks[4].symbol).take(2).group_by_day(:date).count %>
                 <%# <%= @client.chart(@stocks[4].symbol).take(2).pluck("date", "change_percent_s") %>
-                <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#80ca00"], width: "150px", height: "100px", library: {scales: {y: {display: false}, x: {display: false}}}, refresh: 60 %>
+                <% if @stocks[i].get_quote.change_percent_s.include?("-") %>
+                <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#ee8182"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
+                <% else %>
+                <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#80ca00"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
                 <%# <%= line_chart [["2022-03-29", 2], ["2022-04-18", 3],["2022-04-29", 1], ["2022-04-29", ]], points: false, width: "150px", height: "100px", library: {scales: {y: {display: false}, x: {display: false}}}, colors: ["red"]%>
+                <% end %>
               </div>
               <div class="bottom-box">
                 <div class="price"><%= number_to_currency(@stocks[i].get_quote.latest_price)%></div>
