@@ -3,66 +3,92 @@
     <div class="top">
       <div class="greeting">Hi, <%= current_user.first_name %> </div>
       <div class="row">
-        <div class="balance">
-          <div class="title">Total Balance </div>
-          <div class="amount"><%= number_to_currency(current_user.balance) %> </div>
-        </div>
-        <%= link_to "+ Top Up", balance_top_up_path, class: "top-up"%>
-      </div>
-      <div class="card-row">
-        <%= render "layouts/card" %>
-        <div class="shares">
-          <div class="title">Transactions</div>
-          <div class="count">
-            <div class="bought flex">
-              <div class="count"><%= @transactions.transaction_type_buy.count %></div>
-              <div class="text">Bought</div>
-            </div>
-            <div class="sold flex">
-              <div class="count"><%= @transactions.transaction_type_sell.count %></div>
-              <div class="text">Sold</div>
-            </div>
+        <div class="title">Statistics</div>
+        <div class="stats">
+          <div class="chart">
+            <%  if @user_stocks.empty? %>
+              <div class="no-data">No data</div>
+            <% else %>
+              <%= pie_chart @transactions.group(:transaction_type).sum(:order_quantity), colors: ["#c0cfdb", "#ffb6c1"], width: "200px", height: "200px", legend: false, donut: true %>
+            <% end %>
+            <div class="caption">Total number of shares bought</div>
+          </div>
+          <div class="chart">
+            <%  if @user_stocks.empty? && current_user.balance == 0 %>
+              <div class="no-data">No data</div>
+            <% else %>
+              <%= pie_chart [number_to_currency(@user_stocks.each.pluck(:total_stock_price).sum), number_to_currency(current_user.balance)], colors: ["#bdd9d1", "#faebd7"], width: "200px", height: "200px", donut: true, legend: false%>
+            <% end %>
+            <div class="caption">Total spent</div>
+          </div>
+          <div class="chart">
+            <%  if @user_stocks.empty? %>
+              <div class="no-data">No data</div>
+            <% else %>
+              <%= pie_chart [number_to_currency(@user_stocks.each.pluck(:total_stock_price).max), number_to_currency(@user_stocks.each.pluck(:total_stock_price).sum)], colors: ["#e9cfc9", "#dfc7de"], width: "200px", height: "200px", donut: true, legend: false %>
+            <% end %>
+            <div class="caption">Highest number of shares bought</div>
           </div>
         </div>
-        <div class="activity">
-          <div class="title">Activity</div>
-          <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "180px", height: "125px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#ee8182"], empty: "No data yet. Start buying shares now!" %>
+        <div class="div">
+          <% if @user_stocks.empty? %>
+          <% else %>
+            <div class="total-shares">
+              <div><%= @user_stocks.each.pluck(:order_quantity).sum %></div>
+            </div>
+          <% end %>
+          <% if @user_stocks.empty? && current_user.balance == 0 %>
+          <% else %>
+            <div class="total-spent">
+              <div><%= number_to_percentage(@user_stocks.each.pluck(:total_stock_price).sum / current_user.balance * 100, precision: 0) %></div>
+            </div>
+          <% end %>
+          <% if @user_stocks.empty? %>
+          <% else %>
+            <div class="most-bought">
+              <div><%= @user_stocks.each.pluck(:order_quantity).max%></div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
     <div class="bottom-row">
       <div class="title">My Portfolio</div>
-      <div class="container">
-        <div class="header">
-          <div class="label">Date</div>
-          <div class="label">Company</div>
-          <div class="label">Shares</div>
-          <div class="label">Stock Price</div>
-          <div class="label">Total</div>
-          <div class="label">Action</div>
-        </div>
-        <div class="table">
-          <% @user_stocks.order(created_at: :desc).each do |user_stock| %>
-            <div class="date-time list">
-              <div class="date"><%= user_stock.created_at.strftime("%b %d, %Y") %></div>
-              <div class="time"><%= user_stock.created_at.strftime("%l:%M %p") %></div>
-            </div>
-            <div class="company list">
-              <img src="<%= @stocks.find_by(symbol: user_stock.stock_symbol).logo_url %>">
-              <div class="details">
-                <div class="symbol"><%= user_stock.stock_symbol %></div>
-                <div class="company-name"><%= user_stock.company_name %></div>
+      <% if @user_stocks.empty? %>
+        <div class="no-data">No data</div>
+      <% else %>
+        <div class="container">
+          <div class="header">
+            <div class="label">Date</div>
+            <div class="label">Company</div>
+            <div class="label">Shares</div>
+            <div class="label">Stock Price</div>
+            <div class="label">Total</div>
+            <div class="label">Action</div>
+          </div>
+          <div class="table">
+            <% @user_stocks.order(created_at: :desc).each do |user_stock| %>
+              <div class="date-time list">
+                <div class="date"><%= user_stock.created_at.strftime("%b %d, %Y") %></div>
+                <div class="time"><%= user_stock.created_at.strftime("%l:%M %p") %></div>
               </div>
-            </div>
-            <div class="quantity list"><%= user_stock.order_quantity %></div>
-            <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
-            <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
-            <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'sell') do %>
-            <%= image_tag "sell.png" %>
+              <div class="company list">
+                <img src="<%= @stocks.find_by(symbol: user_stock.stock_symbol).logo_url %>">
+                <div class="details">
+                  <div class="symbol"><%= user_stock.stock_symbol %></div>
+                  <div class="company-name"><%= user_stock.company_name %></div>
+                </div>
+              </div>
+              <div class="quantity list"><%= user_stock.order_quantity %></div>
+              <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
+              <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
+              <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'sell') do %>
+                <%= image_tag "sell.png" %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="right">
