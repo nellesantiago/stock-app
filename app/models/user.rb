@@ -14,6 +14,4 @@ class User < ApplicationRecord
 
   has_many :user_stocks, dependent: :destroy
   has_many :transactions, dependent: :destroy
-
-  broadcasts_to -> (user) { "users" }, inserts_by: :prepend
 end

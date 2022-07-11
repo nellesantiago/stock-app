@@ -9,12 +9,7 @@ class BalanceController < ApplicationController
         @user = current_user
         @user.balance += balance_param[:balance].to_d
         @user.save
-        respond_to do |format|
-            format.turbo_stream do
-                render turbo_stream: turbo_stream.replace(@user, partial: "users/balance", locals: {user: @user})
-            end
-            format.html { redirect_to user_stocks_path }
-        end
+        redirect_to user_stocks_path
     end
 
 private
