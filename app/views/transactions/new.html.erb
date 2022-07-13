@@ -1,5 +1,42 @@
-<h1>New Transaction</h1>
-
-<%= render 'form', transaction: @transaction, stock: @stock %>
-
-<%= link_to 'Back', transactions_path %>
+<div class="buy-sell">
+  <div class="bg-form">
+  </div>
+  <div class="overlay">
+    <div class="container">
+      <%= link_to user_stocks_path do %>
+        <i class="fa-solid fa-circle-xmark"></i>
+      <% end %>
+      <div class="box">
+        <div class="left">
+          <%= video_tag "buy-sell.mp4", autoplay: true, loop: :loop, height: "450px" %>
+        </div>
+        <div class="right">
+          <div class="details">
+            <div class="company">
+              <img src="<%= @stock.logo_url %>">
+              <div class="company-details">
+                <div class="symbol"><%= @stock.symbol %></div>
+                <div class="name"><%= @stock.company_name %></div>
+              </div>
+            </div>
+            <div class="stock-price">
+              <div class="label">Stock Price:</div>
+              <div class="price"><%=number_to_currency(@stock.get_quote.latest_price) %></div>
+            </div>
+            <div class="current-shares">
+              <div class="label">Current Shares:</div>
+              <% if @user_stock.nil? %>
+                <div class="quantity">0</div>
+              <% else %>
+                <div class="quantity"><%= @user_stock.order_quantity %></div>
+              <% end %>
+            </div>
+          </div>
+          <div class="form">
+            <%= render 'form', transaction: @transaction, stock: @stock %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
