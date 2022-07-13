@@ -1,6 +1,7 @@
 .home {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   header {
     height: 70px;
@@ -158,7 +159,7 @@
       .container {
         margin: 30px;
 
-        .bg {
+        .bg-home {
           img {
             width: 700px;
             transform: translate(-40px, 50px);
@@ -172,10 +173,7 @@
           border-radius: 20px;
           position: absolute;
           top: 17%;
-          right: 18%;
-          //   box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-          //   -webkit-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-          //   -moz-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
+          right: 10%;
 
           .transactions {
             position: absolute;
@@ -208,12 +206,10 @@
 
               .fa-money-bill-wave {
                 color: #436d6c;
-
               }
 
               .fa-hand-holding-dollar {
                 color: #b54b4d;
-
               }
 
               &:nth-child(1) {
@@ -230,9 +226,6 @@
             background-color: #d1e7ff;
             height: 280px;
             border-radius: 20px 20px 0 0;
-            // box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-            // -webkit-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-            // -moz-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
 
             .display {
               display: flex;
@@ -337,9 +330,6 @@
             background-color: white;
             border-radius: 0 0 20px 20px;
             padding: 10px 0;
-            // box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-            // -webkit-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
-            // -moz-box-shadow: 2px 2px 15px -4px rgba(47, 47, 47, 0.42) inset;
 
             .box {
               display: flex;
@@ -376,93 +366,4 @@
       }
     }
   }
-
-  // footer {
-  //   height: 120px;
-  //   display: flex;
-  //   width: 80%;
-  //   margin: 0 auto;
-  //   justify-content: space-between;
-  //   transform: translateY(-20px);
-  //   font-size: 10px;
-  //   color: rgb(106, 106, 106);
-  //   padding: 20px;
-  //   border-radius: 0 0 20px 20px;
-
-  //   img {
-  //     width: 60px;
-  //     height: 25px;
-  //   }
-
-  //   .title {
-  //     font-weight: 600;
-  //     margin-bottom: 10px;
-  //   }
-
-  //   ul li {
-  //     list-style-type: none;
-  //     margin-bottom: 5px;
-  //     cursor: pointer;
-
-  //     &:hover {
-  //       text-decoration: underline;
-  //     }
-  //   }
-
-  //   .company {
-  //     padding-right: 50px;
-  //   }
-
-  //   .subscribe {
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: space-between;
-
-  //     .news {
-  //       display: flex;
-  //       flex-direction: column;
-
-  //       input {
-  //         height: 30px;
-  //         width: 200px;
-  //         outline: none;
-  //         border: none;
-  //         background-color: white;
-  //         border-radius: 20px;
-  //         margin-top: 5px;
-  //         padding: 0 15px;
-  //         font-size: 12px;
-  //         position: relative;
-  //         transform: translateX(-5px);
-
-  //         &::placeholder {
-  //           font-size: 12px;
-  //         }
-  //       }
-
-  //       button {
-  //         width: 50px;
-  //         height: 30px;
-  //         background-color: #414af4;
-  //         color: white;
-  //         outline: none;
-  //         border: none;
-  //         border-radius: 20px;
-  //         position: absolute;
-  //         left: 12.5%;
-  //         top: 30.5%;
-  //         font-size: 10px;
-  //       }
-  //     }
-
-  //     .socials {
-  //       font-size: 14px;
-  //       cursor: pointer;
-
-  //       .fa-brands {
-  //         margin-right: 10px;
-  //       }
-  //     }
-  //   }
-  // }
 }

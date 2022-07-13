@@ -1,5 +1,17 @@
 .login {
-  .bg {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #414af4;
+  }
+  
+  .bg-login {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     transform: rotate(-15deg) skew(-25deg);
@@ -195,108 +207,106 @@
     transform: translate(-50%, -50%);
     background-color: white;
     width: 1300px;
-    height: 700px;
+    height: 800px;
     border-radius: 20px;
 
     .right {
-        background-color: #414af4;
-        border-radius: 0 20px 20px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      background-color: #414af4;
+      border-radius: 0 20px 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        img {
-            width: 600px;
-            position: absolute;
-            right: 5%
-        }
+      img {
+        width: 600px;
+        position: absolute;
+        right: 5%;
+      }
     }
 
     .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 700px;
+
+      img {
+        width: 100px;
+      }
+
+      .form {
+        margin-top: 20px;
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
-        width: 700px;
+        align-items: center;
 
-        img {
-            width: 100px;
+        input[type='email'],
+        input[type='password'],
+        input[type='text'] {
+          width: 400px;
+          height: 60px;
+          border: none;
+          background-color: #414af4;
+          color: white;
+          padding: 0 20px;
+          border-radius: 20px;
+          outline: none;
+          font-size: 16px;
+
+          &::placeholder {
+            color: white;
+          }
+
+          &:focus::placeholder {
+            color: transparent;
+          }
         }
 
-        .form {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-
-            input[type="email"],
-            input[type="password"],
-            input[type="text"] {
-                width: 400px;
-                height: 60px;
-                border: none;
-                background-color: #414af4;
-                color: white;
-                padding: 0 20px;
-                border-radius: 20px;
-                outline: none;
-                font-size: 16px;
-
-                &::placeholder {
-                    color: white;
-                }
-
-                &:focus::placeholder {
-                    color: transparent;
-                }
-            }
-
-            .field, .actions {
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               margin: 10px;
-            }
-
-            input[type="checkbox"] {
-                accent-color: #414af4;
-                cursor: pointer;
-                margin-right: 5px;
-            }
-
-            input[type="submit"] {
-                margin: 10px;
-                height: 50px;
-                border: 1px solid #414af4;
-                width: 400px;
-                color: #414af4;
-                background: none;
-                border-radius: 20px;
-                font-size: 16px;
-                margin-bottom: 30px;
-                cursor: pointer;
-            }
-
-            a {
-                text-decoration: none;
-                font-size: 14px;
-                color: rgb(47, 47, 47);
-
-                &:hover {
-                    text-decoration: underline;
-                }
-                 
-            }
-
-            .fa-regular {
-                color: #414af4;
-                font-size: 25px;
-                margin-top: 20px;
-            }
+        .field,
+        .actions {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 10px;
         }
+
+        input[type='checkbox'] {
+          accent-color: #414af4;
+          cursor: pointer;
+          margin-right: 5px;
+        }
+
+        input[type='submit'] {
+          margin: 10px;
+          height: 50px;
+          border: 1px solid #414af4;
+          width: 400px;
+          color: #414af4;
+          background: none;
+          border-radius: 20px;
+          font-size: 16px;
+          margin-bottom: 30px;
+          cursor: pointer;
+        }
+
+        a {
+          text-decoration: none;
+          font-size: 14px;
+          color: rgb(47, 47, 47);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .fa-regular {
+          color: #414af4;
+          font-size: 25px;
+          margin-top: 20px;
+        }
+      }
     }
-
-
   }
 }
