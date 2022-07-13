@@ -2,7 +2,6 @@
   <% if transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
       <ul>
         <% transaction.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,29 +9,26 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.hidden_field :transaction_type, value: params[:transaction_type] %>
   </div>
-
   <div class="field">
     <%= form.hidden_field :stock_symbol, value: stock.symbol %>
   </div>
-
   <div class="field">
     <%= form.hidden_field :company_name, value: stock.company_name %>
   </div>
-
   <div class="field">
     <%= form.hidden_field :stock_price, value: stock.get_quote.latest_price %>
   </div>
-
   <div class="field">
-    <%= form.label :order_quantity %>
-    <%= form.number_field :order_quantity, min: 0.1, step: :any, value: 0.0 %>
+    <%= form.number_field :order_quantity, min: 0.1, step: :any, value: "", placeholder: "Quantity"%>
   </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <% if params[:transaction_type] == "buy" %>
+      <%= form.submit :Buy %>
+    <% else %>
+      <%= form.submit :Sell %>
+    <% end %>
   </div>
 <% end %>
