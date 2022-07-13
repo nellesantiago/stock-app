@@ -5,12 +5,28 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.where(role: 'trader')
+    @client = IEX::Api::Client.new
+    @index = [6, 18, 16, 15]
+    @stocks = Stock.all
+    @highest_trader = get_highest('order_quantity')
+    @highest_shares_bought = @highest_trader[0]
+    @top_trader = User.find(@highest_trader[1])
+    @top_trader_name = @top_trader.first_name + " " + @top_trader.last_name
+    @highest_spender =  get_highest('total_stock_price')
+    @amount_spent = @highest_spender[0]
+    @top_spender = User.find(@highest_spender[1])
+    @top_spender_name = @top_spender.first_name + " " + @top_spender.last_name
+    @richest_trader = @users.each.pluck(:balance, :id).max
+    @highest_balance = @richest_trader[0]
+    @richest_trader = User.find(@richest_trader[1])
+    @richest_trader_name = @richest_trader.first_name + " " + @richest_trader.last_name
   end
 
   # GET /users/1 or /users/1.json
   def show
     @user_stocks = @user.user_stocks
     @transactions = @user.transactions
+    @stocks = Stock.all
   end
 
   # GET /users/new
@@ -49,7 +65,7 @@ class UsersController < ApplicationController
   def destroy
     UserMailer.with(user: @user).declined_account.deliver_now
     @user.destroy
-    redirect_to users_path, notice: "User was successfully destroyed."
+    redirect_to users_path, notice: "User was successfully deleted."
   end
 
   private
@@ -67,7 +83,11 @@ class UsersController < ApplicationController
       if current_user.admin?
         return
       else
-        redirect_to user_stocks_path, alert: "Function is only for admin"
+        redirect_to user_stocks_path, alert: "Function is only for admin!"
       end
+    end
+
+    def get_highest(attr)
+      @users.joins(:user_stocks).group('user_id').pluck("sum(user_stocks.#{attr})", "user_stocks.user_id").max
     end
 end
