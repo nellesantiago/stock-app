@@ -1,0 +1,9 @@
+user_stock:
+  id: 1
+  stock_symbol: "AMD"
+  company_name: "Advanced Micro Devices Inc."
+  order_quantity: 5
+  # logo_url: "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AMD.png"
+  created_at: Thu, 07 Jul 2022 23:00:31.268738000 UTC +00:00
+  updated_at: Thu, 07 Jul 2022 23:00:31.268738000 UTC +00:00
+  user_id: 1

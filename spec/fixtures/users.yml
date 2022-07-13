@@ -1,0 +1,49 @@
+trader:
+  id: 1
+  first_name: "Maia"
+  last_name: "Cruz"
+  email: "junellesantiago@gmail.com"
+  encrypted_password: "1234567890"
+  status: "approved"
+  role: "trader"
+  confirmed_at: Thu, 07 Jul 2022 00:00:00.000000000 UTC +00:00
+  balance: 1000000
+
+admin:
+  id: 3
+  first_name: "Egia"
+  last_name: "Trading"
+  email: "egiatrading@gmail.com"
+  encrypted_password: "1234567890"
+  role: "admin"
+  confirmed_at: Thu, 07 Jul 2022 00:00:00.000000000 UTC +00:00
+
+unconfirmed_trader:
+  id: 2
+  first_name: "Maia"
+  last_name: "Cruz"
+  email: "maiacruz@gmail.com"
+  encrypted_password: "1234567890"
+  role: "trader"
+
+pending_user:
+  id: 4
+  first_name: "Pending"
+  last_name: "User"
+  email: "pendinguser@gmail.com"
+  encrypted_password: "1234567890"
+  status: "pending"
+  role: "trader"
+  confirmed_at: Thu, 07 Jul 2022 00:00:00.000000000 UTC +00:00
+  balance: 0.0
+
+declined_user:
+  id: 5
+  first_name: "Declined"
+  last_name: "User"
+  email: "declineduser@gmail.com"
+  encrypted_password: "1234567890"
+  status: "declined"
+  role: "trader"
+  confirmed_at: Thu, 07 Jul 2022 00:00:00.000000000 UTC +00:00
+  balance: 0.0
