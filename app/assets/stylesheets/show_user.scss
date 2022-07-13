@@ -1,0 +1,332 @@
+.show-user {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 40px;
+
+  .left {
+    padding-right: 20px;
+
+    .top-row {
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 40px;
+      height: 425px;
+
+      .no-data {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: grey;
+        margin-top: 20px;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .container {
+        margin-top: 20px;
+
+        .header {
+          background-color: #eff8fd;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 10px;
+          height: 50px;
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+
+          .label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .table {
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+          margin-top: 10px;
+          font-size: 14px;
+          height: 260px;
+          overflow: scroll;
+
+          .list,
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            border-bottom: 1px solid rgb(235, 235, 235);
+          }
+
+          a {
+            text-decoration: none;
+            color: red;
+          }
+
+          .date-time {
+            flex-direction: column;
+            color: grey;
+            font-size: 12px;
+
+            .time {
+              font-size: 10px;
+            }
+          }
+
+          .company {
+            justify-content: flex-start;
+            padding-left: 50px;
+
+            img {
+              width: 30px;
+              border-radius: 10px;
+              margin-right: 10px;
+            }
+
+            .symbol {
+              font-weight: 500;
+            }
+
+            .company-name {
+              font-size: 12px;
+              color: grey;
+            }
+          }
+
+          img {
+            width: 25px;
+          }
+        }
+      }
+    }
+
+    .bottom-row {
+        background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 40px;
+      height: 425px;
+      margin-top: 40px;
+
+      .no-transactions {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: grey;
+        margin-top: 20px;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .container {
+        margin-top: 20px;
+
+        .header {
+          background-color: #eff8fd;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 10px;
+          height: 50px;
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+
+          .label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .table {
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+          margin-top: 10px;
+          font-size: 14px;
+          height: 260px;
+          overflow: scroll;
+
+          .list,
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            border-bottom: 1px solid rgb(235, 235, 235);
+          }
+
+          a {
+            text-decoration: none;
+            color: red;
+          }
+
+          .date-time {
+            flex-direction: column;
+            color: grey;
+            font-size: 12px;
+
+            .time {
+              font-size: 10px;
+            }
+          }
+
+          .company {
+            justify-content: flex-start;
+            padding-left: 50px;
+
+            img {
+              width: 30px;
+              border-radius: 10px;
+              margin-right: 10px;
+            }
+
+            .symbol {
+              font-weight: 500;
+            }
+
+            .company-name {
+              font-size: 12px;
+              color: grey;
+            }
+          }
+
+          img {
+            width: 25px;
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    border-left: 2px solid rgb(232, 232, 232);
+
+    .nav {
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .user-details {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 20px;
+
+      img {
+        width: 200px;
+      }
+
+      .full-name {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 20px 0 5px;
+      }
+
+      .email {
+        color: grey;
+        font-size: 14px;
+      }
+    }
+
+    .row-details {
+      margin-top: 40px;
+      padding: 0 50px;
+
+      .user-status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .user {
+          font-weight: 600;
+        }
+
+        .status {
+          font-size: 14px;
+        }
+
+        .pending {
+          color: rgb(212, 159, 0);
+        }
+
+        .approved {
+          color: green;
+        }
+
+        .declined {
+          color: rgb(230, 0, 0);
+        }
+      }
+
+      .account-created {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .account {
+          font-weight: 600;
+        }
+
+        .created {
+          font-size: 14px;
+          color: grey;
+        }
+      }
+    }
+
+    .stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+
+     .box {
+        margin: 10px 0;
+        background-color: white;
+        border-radius: 20px;
+        height: 130px;
+        padding: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:first-child {
+            background-color: #cfdae3;
+        }
+
+        &:nth-child(2) {
+            background-color: #fed9df;
+        }
+
+        &:nth-child(3) {
+            background-color: #e8d7e7;
+        }
+
+        .title {
+            font-size: 14px;
+            color: #2f2f2f
+        }
+
+        .number {
+            font-size: 25px;
+            font-weight: 600;
+        }
+     }
+    }
+  }
+
+  img {
+    width: 30px;
+  }
+}

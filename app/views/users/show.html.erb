@@ -1,72 +1,112 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @user.status %>
-</p>
-
-<h1>User Stocks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Company name</th>
-      <th>Stock symbol</th>
-      <th>Order quantity</th>
-      <th>Stock price</th>
-      <th>Total stock price</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @user_stocks.each do |user_stock| %>
-      <tr>
-        <td><%= user_stock.company_name %></td>
-        <td><%= user_stock.stock_symbol %></td>
-        <td><%= user_stock.order_quantity %></td>
-        <td><%= user_stock.stock_price %></td>
-        <td><%= user_stock.total_stock_price %></td>
-        <td><%= user_stock.user_id %></td>
-        <td><%= link_to 'Show', user_stock %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h1>Transactions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Transaction type</th>
-      <th>Stock symbol</th>
-      <th>Order quantity</th>
-      <th>Stock price</th>
-      <th>Total stock price</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.stock_symbol %></td>
-        <td><%= transaction.order_quantity %></td>
-        <td><%= transaction.stock_price %></td>
-        <td><%= transaction.total_stock_price %></td>
-        <td><%= transaction.user.email %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'Back', users_path %>
+<div class="show-user">
+  <div class="left">
+    <div class="top-row">
+      <div class="title">Portfolio</div>
+      <% if @user_stocks.empty? %>
+        <div class="no-data">No data</div>
+      <% else %>
+        <div class="container">
+          <div class="header">
+            <div class="label">Date</div>
+            <div class="label">Company</div>
+            <div class="label">Shares</div>
+            <div class="label">Stock Price</div>
+            <div class="label">Total</div>
+          </div>
+          <div class="table">
+            <% @user_stocks.order(created_at: :desc).each do |user_stock| %>
+              <div class="date-time list">
+                <div class="date"><%= user_stock.created_at.strftime("%b %d, %Y") %></div>
+                <div class="time"><%= user_stock.created_at.strftime("%l:%M %p") %></div>
+              </div>
+              <div class="company list">
+                <img src="<%= @stocks.find_by(symbol: user_stock.stock_symbol).logo_url %>">
+                <div class="details">
+                  <div class="symbol"><%= user_stock.stock_symbol %></div>
+                  <div class="company-name"><%= user_stock.company_name %></div>
+                </div>
+              </div>
+              <div class="quantity list"><%= user_stock.order_quantity %></div>
+              <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
+              <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="bottom-row">
+      <div class="title">Transactions</div>
+      <% if @transactions.empty? %>
+        <div class="no-transactions">No Transactions</div>
+      <% else %>
+        <div class="container">
+          <div class="header">
+            <div class="label">Date</div>
+            <div class="label">Company</div>
+            <div class="label">Quantity</div>
+            <div class="label">Stock Price</div>
+            <div class="label">Total</div>
+            <div class="label">Type</div>
+          </div>
+          <div class="table">
+            <% @transactions.order(created_at: :desc).each do |transaction| %>
+              <div class="date-time list">
+                <div class="date"><%= transaction.created_at.strftime("%b %d, %Y") %></div>
+                <div class="time"><%= transaction.created_at.strftime("%l:%M %p") %></div>
+              </div>
+              <div class="company list">
+                <img src="<%= @stocks.find_by(symbol: transaction.stock_symbol).logo_url %>">
+                <div class="details">
+                  <div class="symbol"><%= transaction.stock_symbol %></div>
+                  <div class="company-name"><%= transaction.company_name %></div>
+                </div>
+              </div>
+              <div class="quantity list"><%= transaction.order_quantity %></div>
+              <div class="stock-price list"><%= number_to_currency(transaction.stock_price) %></div>
+              <div class="total-price list"><%= number_to_currency(transaction.total_stock_price) %></div>
+              <div class="<%= transaction.transaction_type_buy? ? "green list" : "red list" %>"><%= transaction.transaction_type %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="right">
+    <div class="nav">Profile</div>
+    <div class="user-details">
+      <%= image_tag "avatar.png" %>
+      <div class="full-name"><%= @user.first_name%> <%= @user.last_name %></div>
+      <div class="email"><%= @user.email%></div>
+    </div>
+    <div class="row-details">
+      <div class="user-status">
+        <div class="user">Status:</div>
+        <% if @user.pending? %>
+          <div class="status pending">Pending</div>
+        <% elsif @user.approved? %>
+          <div class="status approved">Approved</div>
+        <% else %>
+          <div class="status declined">Declined</div>
+        <% end %>
+      </div>
+      <div class="account-created">
+        <div class="account">Account Created:</div>
+        <div class="created"><%= @user.created_at.strftime("%b %m, %Y")%></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="box">
+        <div class="title">Remaining Balance</div>
+        <div class="number"><%= number_to_currency(@user.balance) %></div>
+      </div>
+      <div class="box">
+        <div class="title">Total Spent</div>
+        <div class="number"><%= number_to_currency(@user_stocks.pluck(:total_stock_price).sum) %></div>
+      </div>
+      <div class="box">
+        <div class="title">Total Stocks</div>
+        <div class="number"><%= @user_stocks.pluck(:order_quantity).sum %></div>
+      </div>
+    </div>
+  </div>
+</div>
