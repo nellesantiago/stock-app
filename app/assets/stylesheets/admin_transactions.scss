@@ -1,0 +1,118 @@
+.admin-transactions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px;
+
+  .left {
+    padding-right: 20px;
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 20px;
+      font-size: 30px;
+      font-weight: 700;
+
+      input {
+        height: 40px;
+        width: 400px;
+        border: none;
+        border-radius: 20px;
+        padding-left: 20px;
+      }
+    }
+    .no-transactions {
+      background-color: white;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: grey;
+      height: 820px;
+      margin-top: 20px;
+    }
+    .container {
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 40px;
+      height: 820px;
+
+      .header {
+        background-color: #eff8fd;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 10px;
+        height: 50px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr 1fr 1fr 1fr 1fr;
+
+        .label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .table {
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr 1fr 1fr 1fr 1fr;
+        margin-top: 10px;
+        font-size: 14px;
+        max-height: 690px;
+        overflow: scroll;
+
+        .list {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 50px;
+          border-bottom: 1px solid rgb(235, 235, 235);
+        }
+
+        .date-time {
+          flex-direction: column;
+          color: grey;
+          font-size: 12px;
+
+          .time {
+            font-size: 10px;
+          }
+        }
+
+        .green {
+          color: rgb(0, 143, 0);
+        }
+
+        .red {
+          color: rgb(217, 0, 0);
+        }
+
+        .company {
+          justify-content: flex-start;
+          padding-left: 50px;
+
+          img {
+            width: 30px;
+            border-radius: 10px;
+            margin-right: 10px;
+          }
+
+          .symbol {
+            font-weight: 500;
+          }
+
+          .company-name {
+            font-size: 12px;
+            color: grey;
+          }
+        }
+
+        img {
+          width: 25px;
+        }
+      }
+    }
+  }
+}

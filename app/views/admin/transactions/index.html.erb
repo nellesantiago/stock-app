@@ -1,32 +1,46 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Transactions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Transaction type</th>
-      <th>Stock symbol</th>
-      <th>Order quantity</th>
-      <th>Stock price</th>
-      <th>Total stock price</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.stock_symbol %></td>
-        <td><%= transaction.order_quantity %></td>
-        <td><%= transaction.stock_price %></td>
-        <td><%= transaction.total_stock_price %></td>
-        <td><%= transaction.user.email %></td>
-      </tr>
+<div class="admin-transactions">
+  <div class="left">
+    <div class="nav">
+      <div class="title">Transactions</div>
+      <input type="text" placeholder="Search">
+    </div>
+    <% if @transactions.empty? %>
+      <div class="no-transactions">No Transactions</div>
+    <% else %>
+      <div class="container">
+        <div class="header">
+          <div class="label">User</div>
+          <div class="label">Date</div>
+          <div class="label">Company</div>
+          <div class="label">Quantity</div>
+          <div class="label">Stock Price</div>
+          <div class="label">Total</div>
+          <div class="label">Type</div>
+        </div>
+        <div class="table">
+          <% @transactions.order(created_at: :desc).each do |transaction| %>
+          <div class="user list">
+            <%= transaction.user.email %>
+          </div>
+            <div class="date-time list">
+              <div class="date"><%= transaction.created_at.strftime("%b %d, %Y") %></div>
+              <div class="time"><%= transaction.created_at.strftime("%l:%M %p") %></div>
+            </div>
+            <div class="company list">
+              <img src="<%= @stocks.find_by(symbol: transaction.stock_symbol).logo_url %>">
+              <div class="details">
+                <div class="symbol"><%= transaction.stock_symbol %></div>
+                <div class="company-name"><%= transaction.company_name %></div>
+              </div>
+            </div>
+            <div class="quantity list"><%= transaction.order_quantity %></div>
+            <div class="stock-price list"><%= number_to_currency(transaction.stock_price) %></div>
+            <div class="total-price list"><%= number_to_currency(transaction.total_stock_price) %></div>
+            <div class="<%= transaction.transaction_type_buy? ? "green list" : "red list" %>"><%= transaction.transaction_type %></div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
-<br>
