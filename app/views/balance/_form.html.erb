@@ -1,24 +1,19 @@
 <%= form_with model: user, url: balance_top_up_path, method: :patch do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <% user.errors.each do |error| %>
+        <div><%= error.full_message %></div>
+      <% end %>
     </div>
   <% end %>
-
-  <h1><%= user.balance %></h1>
-
-  <div class="field">
-    <%= form.label :balance %>
-    <%= form.number_field :balance, step: :any, value: 0.0, min: 0.1 %>
+  <div class="current-balance">
+    <div class="current">Current Balance:</div>
+    <div class="balance"><%= number_to_currency(user.balance) %></div>
   </div>
-
+  <div class="field">
+    <%= form.number_field :balance, step: :any, value: "", min: 0.1, placeholder: "Enter Amount" %>
+  </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Top Up"%>
   </div>
 <% end %>
