@@ -54,7 +54,7 @@
     </div>
     <div class="right">
       <div class="container">
-        <div class="bg"><%= image_tag "arrow.png"%></div>
+        <div class="bg-home"><%= image_tag "arrow.png"%></div>
         <div class="phone-1">
           <div class="top">
             <div class="display">
@@ -169,3 +169,29 @@
       
     </footer> %>
   </div>
+  <% if notice.present? %>
+    <div class="bg-notice">
+      <div class="container">
+        <div class="top-notice">
+          <div class="notice"><%= notice %></div>
+          <%= video_tag "mail.mp4", autoplay: true, loop: :loop, height: "180px" %>
+        </div>
+        <div class="bottom">
+          <%= link_to "Close", root_path %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if alert.present? %>
+    <div class="bg-notice">
+      <div class="container">
+        <div class="top-alert">
+          <div class="alert"><%= alert %></div>
+          <%= video_tag "invalid.mp4", autoplay: true, loop: :loop, height: "100px" %>
+        </div>
+        <div class="bottom">
+          <%= link_to "Close", user_stocks_path %>
+        </div>
+      </div>
+    </div>
+  <% end %>
