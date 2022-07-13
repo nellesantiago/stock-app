@@ -8,37 +8,36 @@ class UsersController < ApplicationController
     @client = IEX::Api::Client.new
     @index = [6, 18, 16, 15]
     @stocks = Stock.all
-    @highest_trader = get_highest('order_quantity')
-    @highest_shares_bought = @highest_trader[0]
-    @top_trader = User.find(@highest_trader[1])
-    @top_trader_name = @top_trader.first_name + " " + @top_trader.last_name
-    @highest_spender =  get_highest('total_stock_price')
-    @amount_spent = @highest_spender[0]
-    @top_spender = User.find(@highest_spender[1])
-    @top_spender_name = @top_spender.first_name + " " + @top_spender.last_name
+
+    @highest_trade = get_top_trade
+    @highest_shares_bought = @highest_trade[0]
+    @top_trader = User.find(@highest_trade[1])
+    @top_trader_name = get_name(@top_trader)
+
+    @highest_spent =  get_top_spent
+    @amount_spent = @highest_spent[0]
+    @top_spender = User.find(@highest_spent[1])
+    @top_spender_name = get_name(@top_spender)
+
     @richest_trader = @users.each.pluck(:balance, :id).max
     @highest_balance = @richest_trader[0]
     @richest_trader = User.find(@richest_trader[1])
-    @richest_trader_name = @richest_trader.first_name + " " + @richest_trader.last_name
+    @richest_trader_name = get_name(@richest_trader)
   end
 
-  # GET /users/1 or /users/1.json
   def show
     @user_stocks = @user.user_stocks
     @transactions = @user.transactions
     @stocks = Stock.all
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users or /users.json
   def create
     @user = User.new(user_params)
     @user.status = 'approved'
@@ -51,7 +50,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
   def update
     if @user.update(user_params)
       UserMailer.with(user: @user).welcome_email.deliver_now
@@ -61,7 +59,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
   def destroy
     UserMailer.with(user: @user).declined_account.deliver_now
     @user.destroy
@@ -69,12 +66,12 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :status, :first_name, :last_name)
     end
@@ -87,7 +84,15 @@ class UsersController < ApplicationController
       end
     end
 
-    def get_highest(attr)
-      @users.joins(:user_stocks).group('user_id').pluck("sum(user_stocks.#{attr})", "user_stocks.user_id").max
+    def get_top_trade
+      UserStock.group('user_id').sum('order_quantity').invert.max
+    end
+
+    def get_top_spent
+      Transaction.group('user_id').group('transaction_type').sum('total_stock_price').invert.max.flatten 
+    end
+
+    def get_name(user)
+      user.first_name + " " + user.last_name
     end
 end

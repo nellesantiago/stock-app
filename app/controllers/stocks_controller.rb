@@ -2,7 +2,6 @@ class StocksController < ApplicationController
   before_action :verify_status, only: %i[show]
   before_action :redirect, only: %i[home]
 
-  # GET /stocks or /stocks.json
   def index
     @stocks = Stock.all
   end
