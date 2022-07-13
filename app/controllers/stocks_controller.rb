@@ -6,11 +6,6 @@ class StocksController < ApplicationController
     @stocks = Stock.all
   end
 
-  # GET /stocks/1 or /stocks/1.json
-  def show
-    @stock = Stock.find(params[:id])
-  end
-
   def home
   end
 

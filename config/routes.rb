@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, :path_prefix => 'devise'
   
   resources :users
-  resources :stocks, only: %i[index show]
-  resources :user_stocks, only: %i[index show]
+  resources :stocks, only: %i[index]
+  resources :user_stocks, only: %i[index]
   resources :transactions, only: %i[index new create]
 
   namespace :admin do
