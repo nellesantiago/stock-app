@@ -1,32 +1,154 @@
-<p id="alert"><%= alert %></p>
-
-<h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.status %></td>
-        <td><%= user.role %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= render 'approve', user: user %></td>
-        <td><%= render 'decline', user: user %></td>
-        <td><%= link_to 'delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
-<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+<div class="admin-dashboard">
+  <div class="left">
+    <div class="bottom">
+      <div class="nav">
+        <div class="label">
+          <div class="title">All Traders</div>
+          <div class="dashboard-title">Dashboard</div>
+        </div>
+        <%= link_to '+ Add New User', new_user_path, class: "add-user" %>
+      </div>
+      <div class="table">
+        <div class="header">
+          <div class="name">Status</div>
+          <div class="name">Name</div>
+          <div class="name">Email Address</div>
+          <div class="name">Action</div>
+        </div>
+        <div class="container">
+          <% @users.each do |user| %>
+            <% if user.approved? %>
+              <div class="list">
+                <div class="status data">
+                  <%= image_tag "approved.png" %>
+                </div>
+                <div class="name data">
+                  <%= user.first_name %> <%= user.last_name %>
+                </div>
+                <div class="email data"><%= user.email %></div>
+                <div class="option data">
+                  <div class="decline icon"><%= render 'decline', user: user %></div>
+                  <%= link_to user do %>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <% end %>
+                  <%= link_to edit_user_path(user) do %>
+                    <i class="fa-solid fa-pen"></i>
+                  <% end %>
+                  <%= link_to user, method: :delete, data: { confirm: 'Delete user?' } do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="top">
+      <div class="box">
+        <div class="nav">
+          <div class="title pending">Pending</div>
+          <div class="count"><%= User.where(status: 'pending').count%></div>
+        </div>
+        <% @users.each do |user| %>
+          <% if user.pending? %>
+            <div class="list">
+              <div class="email"><%= user.email %></div>
+              <div class="action">
+                <div class="approve icon"><%= render 'approve', user: user %></div>
+                <div class="decline icon"><%= render 'decline', user: user %></div>
+                <%= link_to user, method: :delete, data: { confirm: 'Delete user?' } do %>
+                  <i class="fa-solid fa-trash"></i>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="box">
+        <div class="nav">
+          <div class="title declined">Declined</div>
+          <div class="count"><%= User.where(status: 'declined').count%></div>
+        </div>
+        <% @users.each do |user| %>
+          <% if user.declined? %>
+            <div class="list">
+              <div class="email"><%= user.email %></div>
+              <div class="action">
+                <div class="approve icon"><%= render 'approve', user: user %></div>
+                <%= link_to user, method: :delete, data: { confirm: 'Delete user?' } do %>
+                  <i class="fa-solid fa-trash"></i>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="container">
+      <%= image_tag "logo-background.png" %>
+      <div class="full-name"><%= current_user.first_name %> <%= current_user.last_name %></div>
+      <div class="email"><%= current_user.email %></div>
+    </div>
+    <div class="stats">
+      <div class="box">
+        <div class="title">Top Trader</div>
+        <div class="data">
+          <div class="number"><%= @highest_shares_bought %> Shares</div>
+          <div class="user">
+            <div class="name"><%= image_tag "avatar.png"%> <%= @top_trader_name %></div>
+            <div class="email"><%= @top_trader.email %></div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="title">Top Spender</div>
+        <div class="data">
+          <div class="number"><%= number_to_currency(@amount_spent) %></div>
+          <div class="user">
+            <div class="name"><%= image_tag "avatar.png"%> <%= @top_spender_name %></div>
+            <div class="email"><%= @top_spender.email %></div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="title">Richest Trader</div>
+        <div class="data">
+          <div class="number"><%= number_to_currency(@highest_balance) %></div>
+          <div class="user">
+            <div class="name"><%= image_tag "avatar.png"%> <%= @richest_trader_name %></div>
+            <div class="email"><%= @richest_trader.email %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if notice.present? %>
+  <div class="bg">
+    <div class="container">
+      <div class="top-notice">
+        <div class="notice"><%= notice %></div>
+        <%= video_tag "notice.mp4", autoplay: true, loop: :loop, height: "100px" %>
+      </div>
+      <div class="bottom">
+        <%= link_to "Close", users_path %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if alert.present? %>
+  <div class="bg">
+    <div class="container">
+      <div class="top-alert">
+        <div class="alert"><%= alert %></div>
+        <%= video_tag "invalid.mp4", autoplay: true, loop: :loop, height: "100px" %>
+      </div>
+      <div class="bottom">
+        <%= link_to "Close", users_path %>
+      </div>
+    </div>
+  </div>
+<% end %>
