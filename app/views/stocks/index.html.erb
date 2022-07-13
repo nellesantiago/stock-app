@@ -2,7 +2,7 @@
   <div class="title">Stocks</div>
   <div class="container">
     <% @stocks.each do |stock| %>
-      <%= link_to stock, class: "box" do %>
+      <%= link_to new_transaction_path(:stock_symbol => stock.symbol, :transaction_type => 'buy'), class: "box" do %>
         <img src="<%= stock.logo_url %>">
         <div class="info">
           <div class="symbol">
@@ -11,7 +11,7 @@
           <div class="name">
             <%= stock.company_name %>
           </div>
-          <div class="price">$329.13</div>
+          <div class="price"><%= number_to_currency(stock.get_quote.latest_price) %> </div>
         </div>
       <% end %>
     <% end %>

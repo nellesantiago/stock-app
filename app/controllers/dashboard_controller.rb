@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
         if current_user.trader?
             return
         else
-            redirect_to users_path, alert: "Function is only for traders"
+            redirect_to users_path
         end
     end
 end

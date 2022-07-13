@@ -32,20 +32,17 @@
       </div>
       <div class="dashboard-stocks">
         <% @index.each do |i|%>
-          <%= link_to stock_path(@stocks[i].id) do %>
+      <%= link_to new_transaction_path(:stock_symbol => @stocks[i].symbol, :transaction_type => 'buy') do %>
             <div class="box">
               <div class="top-box">
                 <img src="<%= @stocks[i].logo_url %>">
                 <%= @stocks[i].company_name %>
               </div>
               <div class="chart">
-                <%# <%= line_chart @client.chart(@stocks[4].symbol).take(2).group_by_day(:date).count %>
-                <%# <%= @client.chart(@stocks[4].symbol).take(2).pluck("date", "change_percent_s") %>
                 <% if @stocks[i].get_quote.change_percent_s.include?("-") %>
                 <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#ee8182"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
                 <% else %>
                 <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#80ca00"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
-                <%# <%= line_chart [["2022-03-29", 2], ["2022-04-18", 3],["2022-04-29", 1], ["2022-04-29", ]], points: false, width: "150px", height: "100px", library: {scales: {y: {display: false}, x: {display: false}}}, colors: ["red"]%>
                 <% end %>
               </div>
               <div class="bottom-box">

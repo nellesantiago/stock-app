@@ -1,5 +1,5 @@
 <div class="login">
-  <div class="bg">
+  <div class="bg-login">
     <div class="bar-1"></div>
     <div class="bar-2nd">
       <div class="bar-2"></div>
@@ -21,8 +21,6 @@
     <div class="left">
       <%= image_tag "logo.png" %>
       <div class="form">
-       <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field">
             <%= f.email_field :email, autocomplete: "email", placeholder: "Email" %>
@@ -51,3 +49,29 @@
     </div>
   </div>
 </div>
+<% if notice.present? %>
+  <div class="bg">
+    <div class="container">
+      <div class="top-notice">
+        <div class="notice"><%= notice %></div>
+        <%= video_tag "notice.mp4", autoplay: true, loop: :loop, height: "100px" %>
+      </div>
+      <div class="bottom">
+        <%= link_to "Close", new_user_session_path %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if alert.present? %>
+  <div class="bg">
+    <div class="container">
+      <div class="top-alert">
+        <div class="alert"><%= alert %></div>
+        <%= video_tag "invalid.mp4", autoplay: true, loop: :loop, height: "100px" %>
+      </div>
+      <div class="bottom">
+        <%= link_to "Close", new_user_session_path %>
+      </div>
+    </div>
+  </div>
+<% end %>

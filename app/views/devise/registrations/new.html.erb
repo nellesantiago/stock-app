@@ -1,5 +1,5 @@
 <div class="login">
-  <div class="bg">
+  <div class="bg-login">
     <div class="bar-1"></div>
     <div class="bar-2nd">
       <div class="bar-2"></div>
@@ -24,10 +24,10 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="field">
-            <%= f.text_field :first_name, autocomplete: "first-name", placeholder: "First Name"%>
+            <%= f.text_field :first_name, autocomplete: "first-name", placeholder: "First Name", spellcheck: false %>
           </div>
           <div class="field">
-            <%= f.text_field :last_name, autocomplete: "last-name", placeholder: "Last Name"%>
+            <%= f.text_field :last_name, autocomplete: "last-name", placeholder: "Last Name", spellcheck: false %>
           </div>
           <div class="field">
             <%= f.email_field :email, autocomplete: "email", placeholder: "Email" %>
