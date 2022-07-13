@@ -14,7 +14,11 @@
   <body>
   <% if user_signed_in? %>
       <div class="sidebar">
+      <% if current_user.admin? %>
+      <%= render "layouts/admin_sidebar" %>
+      <% else %>
       <%= render "layouts/sidebar" %>
+      <% end %>
       </div>
       <% end %>
     <%= yield %>

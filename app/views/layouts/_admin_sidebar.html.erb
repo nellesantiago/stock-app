@@ -1,0 +1,16 @@
+<%= image_tag "logo.png", class: "logo" %>
+<div class="icons">
+  <%= link_to users_path do %>
+    <%= image_tag "menu.png" %>
+  <% end %>
+  <%= link_to stocks_path do %>
+    <%= image_tag "stock.png" %>
+  <% end %>
+  <%= link_to admin_transactions_path do %>
+    <%= image_tag "wallet.png" %>
+  <% end %>
+  <%= image_tag "settings.png" %>
+</div>
+<%= link_to destroy_user_session_path, method: :delete do %>
+  <%= image_tag  "logout.png", class: "logout" %>
+<% end %>
