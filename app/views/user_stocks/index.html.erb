@@ -17,7 +17,7 @@
             <%  if @user_stocks.empty? && current_user.balance == 0 %>
               <div class="no-data">No data</div>
             <% else %>
-              <%= pie_chart [number_to_currency(@user_stocks.each.pluck(:total_stock_price).sum), number_to_currency(current_user.balance)], colors: ["#bdd9d1", "#faebd7"], width: "200px", height: "200px", donut: true, legend: false%>
+              <%= pie_chart [number_to_currency(@total_spent), number_to_currency(current_user.balance)], colors: ["#bdd9d1", "#faebd7"], width: "200px", height: "200px", donut: true, legend: false%>
             <% end %>
             <div class="caption">Total spent</div>
           </div>
@@ -25,7 +25,7 @@
             <%  if @user_stocks.empty? %>
               <div class="no-data">No data</div>
             <% else %>
-              <%= pie_chart [number_to_currency(@user_stocks.each.pluck(:total_stock_price).max), number_to_currency(@user_stocks.each.pluck(:total_stock_price).sum)], colors: ["#e9cfc9", "#dfc7de"], width: "200px", height: "200px", donut: true, legend: false %>
+              <%= pie_chart [number_to_currency(@highest_bought), number_to_currency(@total_spent)], colors: ["#e9cfc9", "#dfc7de"], width: "200px", height: "200px", donut: true, legend: false %>
             <% end %>
             <div class="caption">Highest number of shares bought</div>
           </div>
@@ -40,7 +40,7 @@
           <% if @user_stocks.empty? && current_user.balance == 0 %>
           <% else %>
             <div class="total-spent">
-              <div><%= number_to_percentage(@user_stocks.each.pluck(:total_stock_price).sum / current_user.balance * 100, precision: 0) %></div>
+              <div><%= number_to_percentage(@total_spent / current_user.balance * 100, precision: 0) %></div>
             </div>
           <% end %>
           <% if @user_stocks.empty? %>
@@ -80,8 +80,8 @@
                 </div>
               </div>
               <div class="quantity list"><%= user_stock.order_quantity %></div>
-              <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
-              <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
+              <div class="stock-price list"><%= number_to_currency(user_stock.get_price) %></div>
+              <div class="total-price list"><%= number_to_currency(user_stock.get_total) %></div>
               <div class="icons">
                 <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'buy') do %>
                   <%= image_tag "buy.png" %>
@@ -133,7 +133,7 @@
         <div class="date">Spent in <%= Date.current.strftime("%B %Y") %></div>
         <i class="fa-regular fa-calendar"></i>
       </div>
-      <%= column_chart @user_stocks.pluck(:created_at, :total_stock_price), width: "500px", height: "350px", class: "column-chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"]  %>
+      <%= column_chart @user_stocks.pluck(:stock_symbol, :order_quantity), width: "500px", height: "350px", class: "column-chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"]  %>
     </div>
   </div>
 </div>

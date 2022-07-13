@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
       redirect_to user_stocks_path
     end
     rescue ActiveRecord::RecordInvalid
-    redirect_to request.referrer, alert: "#{@user_stock.errors.full_messages[0]} #{current_user.errors.full_messages[0]}"
+    redirect_to request.referrer, alert: "#{@user_stock.errors.full_messages.to_sentence}#{current_user.errors.full_messages.to_sentence}"
   end
 
   private
@@ -33,9 +33,10 @@ class TransactionsController < ApplicationController
     def update_user_stocks
       @user_stock = current_user.user_stocks.find_or_initialize_by(stock_symbol: @transaction.stock_symbol)
 
-      @user_stock.update!(
-        order_quantity: @user_stock.order_quantity.to_i + (@transaction.order_quantity.to_i * -1)
-      ) if @transaction.transaction_type_sell?
+      if @transaction.transaction_type_sell?
+        @user_stock.update!(order_quantity: @user_stock.order_quantity.to_i + (@transaction.order_quantity.to_i * -1)) 
+        @user_stock.clear_stock
+      end
 
       @user_stock.update!(
         company_name: @transaction.company_name,

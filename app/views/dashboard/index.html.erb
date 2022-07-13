@@ -80,8 +80,8 @@
               <div class="symbol data"><%= user_stock.stock_symbol %></div>
               <div class="name data"><%= user_stock.company_name %></div>
               <div class="quantity data"><%= user_stock.order_quantity %></div>
-              <div class="price data"><%= number_to_currency(user_stock.stock_price) %></div>
-              <div class="total data"><%= number_to_currency(user_stock.total_stock_price) %></div>
+              <div class="price data"><%= number_to_currency(user_stock.get_price) %></div>
+              <div class="total data"><%= number_to_currency(user_stock.get_total) %></div>
             </div>
           <% end %>
         </div>
