@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding: 40px;
+  overflow: scroll;
 
   .left {
     padding-right: 20px;
@@ -124,7 +125,7 @@
         grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
         margin-top: 10px;
         font-size: 14px;
-        height: 300px;
+        max-height: 300px;
         overflow: scroll;
 
         .list,
@@ -171,8 +172,14 @@
           }
         }
 
+        .icons {
+          display: flex;
+          justify-content: center;
+        }
+
         img {
-          width: 25px;
+          width: 20px;
+          margin: 0 5px;
         }
       }
     }
@@ -185,8 +192,30 @@
     border-left: 2px solid rgb(232, 232, 232);
 
     .nav {
-      font-size: 30px;
-      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      a {
+        text-decoration: none;
+        background-color: #414af4;
+        border: 1px solid #414af4;
+        color: white;
+        padding: 5px 15px;
+        font-size: 12px;
+        border-radius: 10px;
+
+        &:hover {
+          border: 1px solid #414af4;
+          color: #414af4;
+          background-color: #eff8fd;
+        }
+      }
     }
     .user-details {
       display: flex;
@@ -242,18 +271,25 @@
         }
       }
 
-      .account-created {
+      .account-created,
+      .current-balance {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 10px 0;
 
-        .account {
+        .account,
+        .current {
           font-weight: 600;
         }
 
         .created {
           font-size: 14px;
           color: grey;
+        }
+
+        .balance {
+          font-weight: 600;
         }
       }
     }
