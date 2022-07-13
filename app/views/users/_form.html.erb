@@ -1,30 +1,28 @@
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <% user.errors.each do |error| %>
+        <div><%= error.full_message %></div>
+      <% end %>
     </div>
   <% end %>
-
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.text_field :first_name, placeholder: "First Name" %>
   </div>
-
   <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.text_field :last_name, placeholder: "Last Name" %>
   </div>
-
   <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.email_field :email, placeholder: "Email Address" %>
   </div>
+  <% if action_name == "new" %>
+  <div class="field">
+    <%= form.password_field :password, placeholder: "Password (minimum 6 characters)" %>
+  </div>
+  <div class="field">
+    <%= form.password_field :password_confirmation, placeholder: "Confirm Password" %>
+  </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
