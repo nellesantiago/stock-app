@@ -2,16 +2,16 @@
   <div class="left">
     <div class="top">
       <header>
-        <div class="welcome">Welcome Back, <%= current_user.first_name %>!</div>
+        <div class="welcome">Welcome, <%= current_user.first_name %>!</div>
         <div class="title">Dashboard</div>
       </header>
       <div class="news-balance">
         <div class="news">
           <div class="title">Activity</div>
           <% if @transactions.empty? %>
-          <div class="no-data">No data</div>
+            <div class="no-data">No data</div>
           <% else %>
-          <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "440px", height: "140px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"] %>
+            <%= area_chart @transactions.pluck(:created_at, :order_quantity), width: "440px", height: "140px", class: "chart", points: false, library: {scales: {y: {display: true}, x: {display: false}}},colors: ["#414af4"] %>
           <% end %>
         </div>
         <div class="balance">
@@ -31,23 +31,23 @@
         <%= link_to "See All", stocks_path %>
       </div>
       <div class="dashboard-stocks">
-        <% @index.each do |i|%>
-      <%= link_to new_transaction_path(:stock_symbol => @stocks[i].symbol, :transaction_type => 'buy') do %>
+        <% @stocks.take(4).each do |i|%>
+          <%= link_to new_transaction_path(:stock_symbol => i.symbol, :transaction_type => 'buy') do %>
             <div class="box">
               <div class="top-box">
-                <img src="<%= @stocks[i].logo_url %>">
-                <%= @stocks[i].company_name %>
+                <img src="<%= i.logo_url %>">
+                <%= i.company_name %>
               </div>
               <div class="chart">
-                <% if @stocks[i].get_quote.change_percent_s.include?("-") %>
-                <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#ee8182"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
+                <% if i.get_quote.change_percent_s.include?("-") %>
+                  <%= area_chart @client.chart(i.symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#ee8182"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
                 <% else %>
-                <%= area_chart @client.chart(@stocks[i].symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#80ca00"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
+                  <%= area_chart @client.chart(i.symbol).take(5).pluck("date", "change_percent_s"), points: false, colors: ["#80ca00"], width: "150px", height: "100px", library: {scales: {y: {display: true}, x: {display: false}}} %>
                 <% end %>
               </div>
               <div class="bottom-box">
-                <div class="price"><%= number_to_currency(@stocks[i].get_quote.latest_price)%></div>
-                <div class="<%= @stocks[i].get_quote.change_percent_s.include?("-") ?  "negative" : "positive" %>"><%= @stocks[i].get_quote.change_percent_s %></div>
+                <div class="price"><%= number_to_currency(i.get_quote.latest_price)%></div>
+                <div class="<%= i.get_quote.change_percent_s.include?("-") ?  "negative" : "positive" %>"><%= i.get_quote.change_percent_s %></div>
               </div>
             </div>
           <% end %>
