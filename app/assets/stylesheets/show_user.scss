@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding: 40px;
+  overflow: scroll;
 
   .left {
     padding-right: 20px;
@@ -52,7 +53,7 @@
           grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
           margin-top: 10px;
           font-size: 14px;
-          height: 260px;
+          max-height: 260px;
           overflow: scroll;
 
           .list,
@@ -151,7 +152,7 @@
           grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
           margin-top: 10px;
           font-size: 14px;
-          height: 260px;
+          max-height: 260px;
           overflow: scroll;
 
           .list,
