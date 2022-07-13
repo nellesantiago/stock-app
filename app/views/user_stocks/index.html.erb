@@ -86,7 +86,7 @@
                 <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'buy') do %>
                   <%= image_tag "buy.png" %>
                 <% end %>
-                <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'sell') do %>
+                <%= link_to new_transaction_path(:stock_symbol => user_stock.stock_symbol, :transaction_type => 'sell'), class: "sell-icon" do %>
                   <%= image_tag "sell.png" %>
                 <% end %>
               </div>
