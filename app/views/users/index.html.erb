@@ -28,13 +28,13 @@
                 <div class="email data"><%= user.email %></div>
                 <div class="option data">
                   <div class="decline icon"><%= render 'decline', user: user %></div>
-                  <%= link_to user do %>
+                  <%= link_to user, class: "show-icon" do %>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   <% end %>
-                  <%= link_to edit_user_path(user) do %>
+                  <%= link_to edit_user_path(user), class: "edit-pen" do %>
                     <i class="fa-solid fa-pen"></i>
                   <% end %>
-                  <%= link_to user, method: :delete, data: { confirm: 'Delete user?' } do %>
+                  <%= link_to user, class: "delete-trash", method: :delete, data: { confirm: 'Delete user?' } do %>
                     <i class="fa-solid fa-trash"></i>
                   <% end %>
                 </div>

@@ -3,7 +3,7 @@
     <%= form.hidden_field :status, value: 'declined' %>
   </div>
   <div class="actions">
-    <%= button_tag :submit do %>
+    <%= button_tag :submit, class: "decline-icon" do %>
       <i class="fa-solid fa-circle-xmark"></i>
     <% end %>
   </div>
