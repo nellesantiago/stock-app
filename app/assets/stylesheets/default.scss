@@ -119,17 +119,18 @@ input::-webkit-inner-spin-button {
   align-items: center;
 
   .container {
-    background-color: #f9f9f9;
-    height: 370px;
+    background-color: white;
+    height: 330px;
     width: 40%;
     border-radius: 20px;
-    padding: 40px;
+    padding: 20px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     .notice {
-      color: #7c8bd0;
+      color: #1c2181;
     }
 
     .top-notice {
@@ -140,7 +141,7 @@ input::-webkit-inner-spin-button {
 
       video {
         text-align: right;
-        margin-left: 20px;
+        margin-left: 30px;
       }
     }
 
@@ -150,7 +151,7 @@ input::-webkit-inner-spin-button {
       margin-top: 40px;
 
       a {
-        color: #7c8bd0;
+        color: #9298b5;
         font-size: 14px;
       }
     }

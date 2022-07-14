@@ -1,5 +1,5 @@
 class UserStock < ApplicationRecord
-  validates :order_quantity, numericality: {greater_than_or_equal_to: 0, message: "Insufficient"}
+  validates :order_quantity, numericality: {greater_than_or_equal_to: 0, message: "can't be higher than your current shares"}
 
   belongs_to :user
 
