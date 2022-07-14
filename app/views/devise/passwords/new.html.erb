@@ -25,7 +25,7 @@
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="field">
 
-            <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, placeholder: "Email", autocomplete: "email" %>
           </div>
           <div class="actions">
             <%= f.submit "Send me reset password instructions" %>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="right">
-      <%= image_tag "password.png" %>
+      <%= video_tag "forgot.mp4", autoplay: true, loop: :loop, class: "forgot" %>
     </div>
   </div>
 </div>
