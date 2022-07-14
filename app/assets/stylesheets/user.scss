@@ -209,18 +209,37 @@
     width: 1300px;
     height: 800px;
     border-radius: 20px;
+    overflow: hidden;
 
     .right {
-      background-color: #414af4;
       border-radius: 0 20px 20px 0;
       display: flex;
       justify-content: center;
       align-items: center;
-
-      img {
-        width: 600px;
+      
+      video {
         position: absolute;
-        right: 5%;
+        right: 2.2%;
+        bottom: 15%;
+      }
+
+      .writing {
+        right: 9%;
+        bottom: 18%;
+        height: 550px;
+        width: 550px;
+      }
+
+      .confirm {
+        right: 12%;
+        bottom: 20%;
+      }
+
+      .forgot {
+        width: 500px;
+        height: 500px;
+        right: 10%;
+        bottom: 22%;
       }
     }
 
@@ -289,6 +308,12 @@
           font-size: 16px;
           margin-bottom: 30px;
           cursor: pointer;
+
+          &:hover {
+            background-color: #ee8182;
+            border: 1px solid #ee8182;
+            color: white;
+          }
         }
 
         a {

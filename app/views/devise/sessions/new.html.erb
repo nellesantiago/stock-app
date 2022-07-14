@@ -45,16 +45,16 @@
       </div>
     </div>
     <div class="right">
-      <%= image_tag "lock.png" %>
+      <%= video_tag "login.mp4", autoplay: true, loop: :loop %>
     </div>
   </div>
 </div>
 <% if notice.present? %>
-  <div class="bg">
+  <div class="bg-notice">
     <div class="container">
       <div class="top-notice">
         <div class="notice"><%= notice %></div>
-        <%= video_tag "notice.mp4", autoplay: true, loop: :loop, height: "100px" %>
+        <%= video_tag "mail.mp4", autoplay: true, loop: :loop, height: "120px" %>
       </div>
       <div class="bottom">
         <%= link_to "Close", new_user_session_path %>
