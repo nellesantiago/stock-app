@@ -40,7 +40,6 @@ class TransactionsController < ApplicationController
 
       @user_stock.update!(
         company_name: @transaction.company_name,
-        stock_price: @transaction.stock_price,
         order_quantity: @user_stock.order_quantity.to_i + @transaction.order_quantity.to_i
       ) if @transaction.transaction_type_buy?
 
