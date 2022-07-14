@@ -11,7 +11,7 @@ User.create(
     password: Rails.application.credentials.admin_password,
     password_confirmation: Rails.application.credentials.admin_password,
     role: 'admin',
-    status: 'Approved',
+    status: 'approved',
     first_name: 'Egia',
     last_name: 'Trading',
     confirmed_at: Date.current
