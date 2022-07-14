@@ -27,8 +27,8 @@
                 </div>
               </div>
               <div class="quantity list"><%= user_stock.order_quantity %></div>
-              <div class="stock-price list"><%= number_to_currency(user_stock.stock_price) %></div>
-              <div class="total-price list"><%= number_to_currency(user_stock.total_stock_price) %></div>
+              <div class="stock-price list"><%= number_to_currency(user_stock.get_price) %></div>
+              <div class="total-price list"><%= number_to_currency(user_stock.get_total) %></div>
             <% end %>
           </div>
         </div>
@@ -101,7 +101,7 @@
       </div>
       <div class="box">
         <div class="title">Total Spent</div>
-        <div class="number"><%= number_to_currency(@user_stocks.pluck(:total_stock_price).sum) %></div>
+        <div class="number"><%= number_to_currency(@total_spent) %></div>
       </div>
       <div class="box">
         <div class="title">Total Stocks</div>
