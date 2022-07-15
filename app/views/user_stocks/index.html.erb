@@ -11,7 +11,7 @@
             <% else %>
               <%= pie_chart @transactions.group(:transaction_type).sum(:order_quantity), colors: ["#c0cfdb", "#ffb6c1"], width: "200px", height: "200px", legend: false, donut: true %>
             <% end %>
-            <div class="caption">Total number of shares bought</div>
+            <div class="caption">Total number of shares</div>
           </div>
           <div class="chart">
             <%  if @user_stocks.empty? && current_user.balance == 0 %>
@@ -27,7 +27,7 @@
             <% else %>
               <%= pie_chart [number_to_currency(@highest_bought), number_to_currency(@total_spent)], colors: ["#e9cfc9", "#dfc7de"], width: "200px", height: "200px", donut: true, legend: false %>
             <% end %>
-            <div class="caption">Highest number of shares bought</div>
+            <div class="caption">Highest number of shares</div>
           </div>
         </div>
         <div class="div">
@@ -40,7 +40,7 @@
           <% if @user_stocks.empty? && current_user.balance == 0 %>
           <% else %>
             <div class="total-spent">
-              <div><%= number_to_percentage(@total_spent / current_user.balance * 100, precision: 0) %></div>
+              <div><%= number_to_percentage(@total_spent / current_user.balance * 100, precision: 1) %></div>
             </div>
           <% end %>
           <% if @user_stocks.empty? %>
