@@ -48,7 +48,7 @@
       <div class="box">
         <div class="nav">
           <div class="title pending">Pending</div>
-          <div class="count"><%= User.where(status: 'pending').count%></div>
+          <div class="count"><%= User.where(status: 'pending').where.not(confirmed_at: nil).count%></div>
         </div>
         <% @users.each do |user| %>
           <% if user.pending? %>
