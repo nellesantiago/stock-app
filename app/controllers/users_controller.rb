@@ -4,9 +4,8 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.where(role: 'trader')
+    @users = User.where(role: 'trader').where.not(confirmed_at: nil)
     @client = IEX::Api::Client.new
-    @index = [6, 18, 16, 15]
     @stocks = Stock.all
     
     @highest_trade = get_top_trade
