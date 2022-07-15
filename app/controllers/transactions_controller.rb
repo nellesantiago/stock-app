@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   def index
     @transactions = current_user.transactions
     @stocks = Stock.all
+    @total_shares_sold = @transactions.group('transaction_type').sum('order_quantity')["sell"]
   end
 
   def new
@@ -11,6 +12,7 @@ class TransactionsController < ApplicationController
     @user = current_user
     @user_stock = current_user.user_stocks.find_by(stock_symbol: params[:stock_symbol])
     @stock = Stock.find_by(symbol: params[:stock_symbol])
+    
   end
 
   def create

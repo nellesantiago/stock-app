@@ -5,7 +5,7 @@ class UserStocksController < ApplicationController
     @user_stocks = current_user.user_stocks
     @stocks = Stock.all
     @transactions = current_user.transactions
-    @total_spent = get_total_spent || 0
+    @total_spent = get_total_spent || 0.0
     @highest_bought = get_highest_stock_bought
   end
 
