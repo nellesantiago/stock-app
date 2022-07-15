@@ -30,6 +30,10 @@ body {
   text-align: left;
 }
 
+#error_explanation {
+  transform: translateX(15px);
+}
+
 .notice {
   color: rgb(39, 128, 97);
 }
