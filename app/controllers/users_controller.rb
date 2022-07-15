@@ -62,7 +62,6 @@ class UsersController < ApplicationController
     @user.status = 'approved'
     @user.skip_confirmation!
     if @user.save
-      UserMailer.with(user: @user).welcome_email.deliver_now
       redirect_to users_path, notice: "User was successfully created."
     else
       render :new
@@ -71,7 +70,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      UserMailer.with(user: @user).welcome_email.deliver_now
+      deliver_mail
       redirect_to users_path, notice: "User was successfully updated."
     else
       render :edit
@@ -79,7 +78,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    UserMailer.with(user: @user).declined_account.deliver_now
+    UserMailer.with(user: @user).deleted_account.deliver_now
     @user.destroy
     redirect_to users_path, notice: "User was successfully deleted."
   end
@@ -117,5 +116,13 @@ class UsersController < ApplicationController
 
     def get_total_spent
       User.find(params[:id]).transactions.group('transaction_type').sum('total_stock_price')['buy']
+    end
+
+    def deliver_mail
+      if user_params[:status] == "approved"
+        UserMailer.with(user: @user).approved_email.deliver_now
+      elsif user_params[:status] == "declined"
+        UserMailer.with(user: @user).declined_account.deliver_now
+      end
     end
 end

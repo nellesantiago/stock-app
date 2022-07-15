@@ -1,0 +1,23 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <% user.errors.each do |error| %>
+        <div><%= error.full_message %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.text_field :first_name, placeholder: "First Name" %>
+  </div>
+  <div class="field">
+    <%= form.text_field :last_name, placeholder: "Last Name" %>
+  </div>
+  <div class="field">
+    <%= form.email_field :email, placeholder: "Email Address" %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
