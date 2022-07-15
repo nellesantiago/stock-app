@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   def index
     @transactions = current_user.transactions
     @stocks = Stock.all
-    @total_shares_sold = @transactions.group('transaction_type').sum('order_quantity')["sell"]
+    @total_shares_sold = @transactions.group('transaction_type').sum('order_quantity')["sell"] || 0
   end
 
   def new

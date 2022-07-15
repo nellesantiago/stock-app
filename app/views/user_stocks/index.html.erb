@@ -40,7 +40,7 @@
           <% if @user_stocks.empty? && current_user.balance == 0 %>
           <% else %>
             <div class="total-spent">
-              <div><%= number_to_percentage(@total_spent / current_user.balance * 100, precision: 1) %></div>
+              <div><%= number_to_percentage(@total_spent / current_user.balance * 100, precision: 0) %></div>
             </div>
           <% end %>
           <% if @user_stocks.empty? %>
