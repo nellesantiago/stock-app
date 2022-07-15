@@ -46,11 +46,11 @@
     <div class="container">
     <div class="box">
         <div class="text">Total Spent</div>
-        <div class="number"><%= number_to_currency(@transactions.each.pluck(:total_stock_price).sum) %></div>
+        <div class="number"><%= number_to_currency(@transactions.group('transaction_type').sum('total_stock_price')['buy'].to_i) %></div>
       </div>
       <div class="box">
         <div class="text">Total Shares Bought</div>
-        <div class="number"><%= @transactions.each.pluck(:order_quantity).sum %></div>
+        <div class="number"><%= @transactions.group('transaction_type').sum('order_quantity')['buy'].to_i %></div>
       </div>
       <div class="box">
         <div class="text">Total Shares Sold</div>
