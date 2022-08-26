@@ -37,5 +37,5 @@
 >> - Mailjet [Documentation](https://dev.mailjet.com)
 >> - Ruby on Rails's [Guides](https://guides.rubyonrails.org/v6.1/)
 >> - [RSpec Rails Gem](https://github.com/rspec/rspec-rails) for testing.
->> - [Chartkick Gem](https://chartkick.com)
+>> - [Chartkick Gem](https://chartkick.com) for stock data presentation.
 >> - Images from [Canva](https://www.canva.com).
