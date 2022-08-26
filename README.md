@@ -20,7 +20,7 @@
 
 ![Dashboard](app/assets/images/screenshots/dashboard.png)
 
-![Portfolio Page](app/assets/images/screenshots/portfolio.png) 
+![Portfolio Page](app/assets/images/screenshots/portfoliio.png) 
 
 ![Forgot Password Page](app/assets/images/screenshots/forgot.png)
 
